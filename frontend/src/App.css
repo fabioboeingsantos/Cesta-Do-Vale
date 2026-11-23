@@ -1364,7 +1364,7 @@ button:disabled {
 
 /* Acabamento dinâmico compartilhado: alcança também botões legados que ainda
    não usam as classes .botao-primario/.botao-secundario. */
-button:not(:where(.assistente-dialogo *)):not(.controle-tema):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo) {
+button:not(:where(.assistente-dialogo *, .inicio-vale *)):not(.controle-tema):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo) {
   min-height: 40px;
   border: 1px solid var(--cor-verde-escuro);
   border-radius: 10px;
@@ -1374,7 +1374,7 @@ button:not(:where(.assistente-dialogo *)):not(.controle-tema):not(.botao-estrela
   transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-button:not(:where(.assistente-dialogo *)):not(.controle-tema):not(.botao-visibilidade):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo):hover:not(:disabled) {
+button:not(:where(.assistente-dialogo *, .inicio-vale *)):not(.controle-tema):not(.botao-visibilidade):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo):hover:not(:disabled) {
   border-color: var(--cor-verde-escuro);
   color: var(--cor-branco);
   background: var(--cor-verde-escuro);
@@ -1382,7 +1382,7 @@ button:not(:where(.assistente-dialogo *)):not(.controle-tema):not(.botao-visibil
   transform: translateY(-1px);
 }
 
-button:not(:where(.assistente-dialogo *)):not(.controle-tema):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo):disabled {
+button:not(:where(.assistente-dialogo *, .inicio-vale *)):not(.controle-tema):not(.botao-estrela):not(.botao-zero-estrelas):not(.botao-quantidade-fechamento):not(.botao-completar-produto):not(.botao-flora):not(.fechar-dialogo-fundo):disabled {
   box-shadow: none;
   transform: none;
   opacity: .65;
@@ -2912,3 +2912,6 @@ button.botao-visibilidade:disabled {
   .lista-produtos-prontos,
   .produtos-resumo-historico { grid-template-columns: 1fr; }
 }
+
+.acesso-informacoes { width: min(100%, 1120px); margin: 12px auto; font-size: .875rem; }
+.acesso-informacoes a { color: var(--cor-verde-escuro); }

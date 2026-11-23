@@ -1,3 +1,4 @@
+import { tamanhosCesta as tamanhos } from '../utilitarios/tamanhosCesta'
 import StarBorder from './StarBorder'
 import { useEffect, useState } from 'react'
 
@@ -6,11 +7,7 @@ const formatarMoeda = (valor) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor ?? 0)
 
 // Os tamanhos e limites seguem as regras definidas para as cestas.
-const tamanhos = [
-  { id: 'pequena', nome: 'Pequena', limite: 5, imagem: '/marca/cesta-pequena.png' },
-  { id: 'media', nome: 'Média', limite: 8, imagem: '/marca/cesta-media.png' },
-  { id: 'grande', nome: 'Grande', limite: 12, imagem: '/marca/cesta-grande.png' },
-]
+
 const limitePorProduto = 10
 
 // As imagens tornam a escolha do modo mais intuitiva sem alterar as regras do pedido.

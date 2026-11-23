@@ -14,7 +14,6 @@ import { imagemProduto } from './utilitarios/imagemProduto'
 import Assistente from './funcionalidades/assistente/Assistente'
 import OrbeFlora from './funcionalidades/assistente/OrbeFlora'
 import { chamarApi } from './api.js'
-import { formatarIdSolicitacao } from './utilitarios/identificadorPedido'
 import './App.css'
 
 function TemaToggle({ tema, aoAlternar }) {
@@ -257,15 +256,16 @@ function App() {
       'content',
       tema === 'escuro' ? '#17211b' : '#1F4D2E',
     )
-    try {
-      window.localStorage.setItem('tema-visualizacao', tema)
-    } catch {
-      // A preferência visual continua funcionando mesmo quando o storage está indisponível.
-    }
   }, [tema])
 
   function alternarTema() {
-    setTema((temaAtual) => (temaAtual === 'escuro' ? 'claro' : 'escuro'))
+    const proximoTema = tema === 'escuro' ? 'claro' : 'escuro'
+    setTema(proximoTema)
+    try {
+      window.localStorage.setItem('tema-visualizacao', proximoTema)
+    } catch {
+      // A preferência visual continua funcionando mesmo quando o storage está indisponível.
+    }
   }
 
   const controleTema = <TemaToggle tema={tema} aoAlternar={alternarTema} />
@@ -373,11 +373,7 @@ function App() {
     setAbaAtual(perfil === 'produtor' ? 'inicio' : 'pedido')
     setCatalogoCarregado(false)
     cestasAnterioresRef.current = null
-    try {
-      setNotificacoes(JSON.parse(window.localStorage.getItem(`notificacoes-cesta-${usuario}`) || '[]'))
-    } catch {
-      setNotificacoes([])
-    }
+    setNotificacoes([])
     carregarCestasDoServidor(perfil === 'assinante' ? usuario : null)
     carregarProdutosDoServidor()
   }
@@ -386,15 +382,17 @@ function App() {
   useEffect(() => {
     if (!usuarioAutenticado || !perfilAtual) return undefined
 
+    let consultaAtiva = true
     let consultaEmAndamento = false
     async function atualizarPedidosCompartilhados() {
-      if (consultaEmAndamento) return
+      if (!consultaAtiva || consultaEmAndamento) return
       consultaEmAndamento = true
       try {
         const filtro = perfilAtual === 'assinante'
           ? `?assinante=${encodeURIComponent(usuarioAutenticado)}`
           : ''
         const resposta = await chamarApi(`/cestas${filtro}`)
+        if (!consultaAtiva) return
         const cestasAtuais = resposta.map(adaptarCestaDaApi)
         const anteriores = cestasAnterioresRef.current
         if (anteriores) {
@@ -451,30 +449,28 @@ function App() {
           if (novasNotificacoes.length) {
             setNotificacoes((atuais) => {
               const idsExistentes = new Set(atuais.map((item) => item.id))
-              const atualizadas = [...novasNotificacoes.filter((item) => !idsExistentes.has(item.id)), ...atuais].slice(0, 40)
-              try {
-                window.localStorage.setItem(`notificacoes-cesta-${usuarioAutenticado}`, JSON.stringify(atualizadas))
-              } catch { /* As notificações continuam disponíveis enquanto a página estiver aberta. */ }
-              return atualizadas
+              return [...novasNotificacoes.filter((item) => !idsExistentes.has(item.id)), ...atuais].slice(0, 40)
             })
           }
         }
         cestasAnterioresRef.current = cestasAtuais
         setPedidos(cestasAtuais)
         const produtos = await chamarApi('/produtos')
+        if (!consultaAtiva) return
         setProdutosDisponiveis(produtos.map(adaptarProdutoDaApi))
-      try {
-        const notificacoesDoServidor = await chamarApi('/notificacoes')
-        setNotificacoes((atuais) => {
-          const porId = new Map(atuais.map((item) => [String(item.id), item]))
-          for (const item of notificacoesDoServidor) porId.set(String(item.id), item)
-          return [...porId.values()]
-            .sort((a, b) => new Date(b.criadaEm) - new Date(a.criadaEm))
-            .slice(0, 40)
-        })
-      } catch {
-        // Notificações persistentes podem estar indisponíveis durante uma atualização da API.
-      }
+        try {
+          const notificacoesDoServidor = await chamarApi('/notificacoes')
+          if (!consultaAtiva) return
+          setNotificacoes((atuais) => {
+            const porId = new Map(atuais.map((item) => [String(item.id), item]))
+            for (const item of notificacoesDoServidor) porId.set(String(item.id), item)
+            return [...porId.values()]
+              .sort((a, b) => new Date(b.criadaEm) - new Date(a.criadaEm))
+              .slice(0, 40)
+          })
+        } catch {
+          // Notificações persistentes podem estar indisponíveis durante uma atualização da API.
+        }
       } catch {
         // Uma falha temporária de rede não interrompe o uso da tela; a próxima consulta tenta novamente.
       } finally {
@@ -484,15 +480,22 @@ function App() {
 
     atualizarPedidosCompartilhados()
     const intervalo = window.setInterval(atualizarPedidosCompartilhados, 8000)
-    return () => window.clearInterval(intervalo)
+    return () => {
+      consultaAtiva = false
+      window.clearInterval(intervalo)
+    }
   }, [usuarioAutenticado, perfilAtual])
 
   useEffect(() => {
-    if (!usuarioAutenticado) return
+    // Limpa somente as cópias persistentes de notificações de versões anteriores.
     try {
-      window.localStorage.setItem(`notificacoes-cesta-${usuarioAutenticado}`, JSON.stringify(notificacoes))
-    } catch { /* A lista permanece disponível na sessão mesmo sem armazenamento local. */ }
-  }, [notificacoes, usuarioAutenticado])
+      const storage = window.localStorage
+      for (let indice = storage.length - 1; indice >= 0; indice -= 1) {
+        const chave = storage.key(indice)
+        if (chave?.startsWith('notificacoes-cesta-')) storage.removeItem(chave)
+      }
+    } catch { /* A navegação continua quando o armazenamento está bloqueado. */ }
+  }, [])
 
   function marcarNotificacoesComoLidas() {
     setNotificacoes((atuais) => atuais.map((notificacao) => ({ ...notificacao, lida: true })))
@@ -846,27 +849,9 @@ function App() {
         return { sucesso: false, erro: erro.message }
       }
     }
-    const cesta = pedidos.find((pedido) => pedido.id === pedidoId)
     setPedidos((atuais) => atuais.map((pedido) => pedido.id === pedidoId
       ? { ...pedido, situacao: 'Enviado', enviadoEm: new Date().toISOString() }
       : pedido))
-    if (cesta?.assinante) {
-      const chave = `notificacoes-cesta-${cesta.assinante}`
-      const notificacao = {
-        id: `${pedidoId}-enviado`,
-        cestaId: pedidoId,
-        titulo: 'Pedido enviado',
-        mensagem: `Seu pedido ${formatarIdSolicitacao(pedidoId)} foi marcado como enviado pelo produtor.`,
-        criadaEm: new Date().toISOString(),
-        lida: false,
-      }
-      try {
-        const antigas = JSON.parse(window.localStorage.getItem(chave) || '[]')
-        window.localStorage.setItem(chave, JSON.stringify([notificacao, ...antigas].slice(0, 40)))
-      } catch {
-        // No modo local, o aviso fica disponível na sessão atual se o storage falhar.
-      }
-    }
     return { sucesso: true }
   }
 
@@ -979,17 +964,19 @@ function App() {
       <>
         <TelaInicio
           aoEntrar={() => setDialogoAcesso('entrar')}
+          aoAcessarFlora={() => setDialogoAcesso('flora')}
           aoCriarConta={() => setDialogoAcesso('cadastro')}
         />
         {dialogoAcesso && (
           <TelaLogin
             key={dialogoAcesso}
-            modoInicial={dialogoAcesso}
+            modoInicial={dialogoAcesso === 'flora' ? 'entrar' : dialogoAcesso}
             token={linkAcesso.token}
             aoSenhaRedefinida={limparSessaoLocal}
             aoEntrar={async (dados) => {
               const resultado = await entrarNoSistema(dados)
               if (resultado?.sucesso) {
+                if (dialogoAcesso === 'flora') abrirPaginaFlora()
                 setLinkAcesso({ token: '', modo: '' })
                 setDialogoAcesso(null)
               }
@@ -1153,6 +1140,7 @@ function App() {
             </p>
           )}
         </header>
+        <p className="acesso-informacoes"><a href="/informacoes#privacidade">Privacidade, cookies e termos da demonstração</a></p>
         {assistenteAberto ? <Assistente
           key={usuarioAutenticado}
           perfil={perfilAtual} nomeUsuario={usuarioAutenticado} produtos={produtosDisponiveis} modoPagina

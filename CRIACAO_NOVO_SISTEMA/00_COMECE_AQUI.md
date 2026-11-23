@@ -15,6 +15,7 @@ Ele orienta o preenchimento dos modelos e a escolha dos recursos a reaproveitar 
 | [01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md](01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md) | Organizar raiz, frontend, backend, banco e infraestrutura |
 | [01_MODELOS/04_CHECKLIST_DE_CRIACAO.md](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md) | Acompanhar a criação, os testes e a publicação |
 | [01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md) | Reunir as decisões em uma instrução para quem desenvolverá o novo sistema |
+| [01_MODELOS/06_PADROES_DE_LANCAMENTO.md](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) | Verificar os 19 padrões de privacidade, acessibilidade e publicação |
 | `02_REFERENCIAS/` | Cópias dos documentos e configurações do projeto de origem, preservando os caminhos relativos |
 | `MANIFESTO.json` | Origem, destino e SHA-256 de cada cópia |
 | [VALIDACAO.md](VALIDACAO.md) | Evidências de integridade e do bloqueio de acesso local |
@@ -51,6 +52,7 @@ Depois, siga esta ordem:
 5. Usar [04_CHECKLIST_DE_CRIACAO.md](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md) para acompanhar o trabalho.
 6. Preencher [05_BRIEFING_PARA_IMPLEMENTACAO.md](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md)
    para reunir as decisões e indicar esse arquivo a quem implementará o projeto.
+7. Revisar os [19 padrões de lançamento](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) no planejamento e antes de publicar.
 
 Trocar apenas nomes e imagens é suficiente somente quando as tarefas, permissões e entidades
 permanecem equivalentes. Consulte `02_REFERENCIAS` como base técnica e copie para a aplicação

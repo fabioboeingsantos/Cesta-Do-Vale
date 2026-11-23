@@ -43,6 +43,7 @@
 
 ## Publicação
 
+- [ ] Conferir os [19 padrões de lançamento](06_PADROES_DE_LANCAMENTO.md) e registrar evidências.
 - [ ] Adaptar Compose/Docker, CI e arquivos da hospedagem.
 - [ ] Conferir RLS/políticas/privilégios, caso use Supabase.
 - [ ] Configurar cookie seguro em HTTPS e origens corretas.

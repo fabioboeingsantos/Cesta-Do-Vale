@@ -69,7 +69,7 @@ function TelaFinalizarPedido({
       <section className="introducao-pedido" aria-labelledby="titulo-finalizacao">
         <p className="texto-saudacao">Última conferência</p>
         <h1 id="titulo-finalizacao">Finalize seu pedido</h1>
-        <p>Confira o tamanho e os produtos. Ao finalizar, o pedido aparecerá no seu histórico.</p>
+        <p>Confira o tamanho e os produtos. Este pedido é simulado, sem cobrança ou entrega real.</p>
       </section>
 
       <section className="resumo-finalizacao" aria-labelledby="titulo-resumo-pedido">
@@ -100,7 +100,7 @@ function TelaFinalizarPedido({
           ))}
         </ul>
         <div className="total-pedido">
-          <span>Valor de conclusão do pedido</span>
+          <span>Total simulado</span>
           <strong>{formatarMoeda(pedido.valorTotal)}</strong>
         </div>
       </section>

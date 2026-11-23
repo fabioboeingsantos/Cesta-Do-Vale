@@ -1,5 +1,6 @@
 import StarBorder from './StarBorder'
-import { useState } from 'react'
+import { abrirInformacaoAtual } from './InformacoesLegais'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { chamarApi } from '../api'
 
 // A mesma tela representa o acesso inicial de Aline e Vanderlei.
@@ -15,6 +16,25 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
   const [erro, setErro] = useState('')
   const [mensagem, setMensagem] = useState('')
   const [carregando, setCarregando] = useState(false)
+
+  const dialogoRef = useRef(null)
+  const tituloRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const dialogo = dialogoRef.current
+    dialogo.showModal()
+    return () => dialogo.close()
+  }, [])
+
+  useLayoutEffect(() => {
+    tituloRef.current.focus()
+  }, [modo])
+
+  function consultarInformacao(evento) {
+    if (evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey) return
+    aoFechar()
+    abrirInformacaoAtual(evento)
+  }
 
   // Troca entre entrar, criar cadastro e recuperar senha, limpando dados do fluxo anterior.
   function trocarModo(novoModo) {
@@ -125,9 +145,15 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
 
   // Renderiza os campos e as ações correspondentes ao modo de acesso atual.
   return (
-    <div className="fundo-dialogo-acesso">
-      <StarBorder className="fechar-dialogo-fundo" type="button" onClick={aoFechar} aria-label="Fechar acesso" />
-        <section className="cartao-login janela-acesso" role="dialog" aria-modal="true" aria-labelledby="titulo-login">
+    <dialog
+      ref={dialogoRef}
+      className="fundo-dialogo-acesso"
+      style={{ width: '100%', height: '100%', maxWidth: 'none', maxHeight: 'none', margin: 0, border: 0 }}
+      aria-labelledby="titulo-login"
+      onCancel={(evento) => { evento.preventDefault(); aoFechar() }}
+    >
+      <button className="fechar-dialogo-fundo" type="button" onClick={aoFechar} tabIndex={-1} aria-hidden="true" />
+        <section className="cartao-login janela-acesso">
           <StarBorder className="botao-fechar-acesso" type="button" onClick={aoFechar} aria-label="Voltar à página inicial">×</StarBorder>
           <header className="cabecalho-login">
             <p className="marca-login">Cesta do Vale</p>
@@ -136,11 +162,12 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
 
           <div className="introducao-login">
             <p className="rotulo-cartao">Acesso ao sistema</p>
-            <h1 id="titulo-login">{titulo}</h1>
+            <h1 id="titulo-login" ref={tituloRef} tabIndex={-1}>{titulo}</h1>
             <p>
               {modo === 'verificar' ? 'Clique em Confirmar e-mail para ativar sua conta.' :
                 ['recuperar', 'reenviar'].includes(modo) ? 'Informe o e-mail usado no cadastro para receber as instruções.' :
                 modo === 'redefinir' ? 'Digite e confirme sua nova senha, com 8 a 128 caracteres.' :
+                modo === 'cadastro' ? <>Seu usuário e sua senha dão acesso à conta. Usamos o e-mail para confirmar o endereço e ajudar você a recuperar o acesso. <a href="#privacidade" onClick={consultarInformacao}>Política de privacidade</a> · <a href="#termos" onClick={consultarInformacao}>Termos da demonstração</a></> :
                 'Acesse com seu usuário ou e-mail e sua senha.'}
             </p>
           </div>
@@ -279,7 +306,7 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
             )}
           </nav>
         </section>
-    </div>
+    </dialog>
   )
 }
 
