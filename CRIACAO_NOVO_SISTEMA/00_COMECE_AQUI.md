@@ -1,6 +1,7 @@
 # Criação de um novo sistema
 
-Pacote de referência atualizado em **16/11/2026** a partir do Cesta do Vale.
+Cópias de referência de **16/11/2026** a partir do Cesta do Vale.
+O roteiro de acesso e prototipação foi atualizado em **23/11/2026**.
 Esta pasta pode ser copiada para o novo projeto como documentação interna.
 
 Para participar do hackathon com outro tema, começar pelo [roteiro de adaptação](HACKATHON.md).
@@ -12,11 +13,13 @@ Ele orienta o preenchimento dos modelos e a escolha dos recursos a reaproveitar 
 | --- | --- |
 | [01_MODELOS/01_DEFINICAO_E_PERSONAS.md](01_MODELOS/01_DEFINICAO_E_PERSONAS.md) | Preencher problema, personas, tarefas e permissões antes de implementar |
 | [01_MODELOS/02_REQUISITOS_E_FLUXOS.md](01_MODELOS/02_REQUISITOS_E_FLUXOS.md) | Definir escopo, jornadas, regras e critérios de aceite |
+| [01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md](01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md) | Decidir como as pessoas entram e conectar as telas das jornadas no protótipo clicável |
 | [01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md](01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md) | Organizar raiz, frontend, backend, banco e infraestrutura |
 | [01_MODELOS/04_CHECKLIST_DE_CRIACAO.md](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md) | Acompanhar a criação, os testes e a publicação |
 | [01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md) | Reunir as decisões em uma instrução para quem desenvolverá o novo sistema |
 | [01_MODELOS/06_PADROES_DE_LANCAMENTO.md](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) | Verificar os 19 padrões de privacidade, acessibilidade e publicação |
 | `02_REFERENCIAS/` | Cópias dos documentos e configurações do projeto de origem, preservando os caminhos relativos |
+| [03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md) | Consultar o mapa preenchido do fluxo de acesso, pedido e separação |
 | `MANIFESTO.json` | Origem, destino e SHA-256 de cada cópia |
 | [VALIDACAO.md](VALIDACAO.md) | Evidências de integridade e do bloqueio de acesso local |
 | [ESTADO_ATUAL.md](ESTADO_ATUAL.md) | Comportamentos atuais, fontes e alterações locais pendentes |
@@ -36,6 +39,7 @@ meu-novo-sistema/
     ├── 00_COMECE_AQUI.md
     ├── 01_MODELOS/
     ├── 02_REFERENCIAS/
+    ├── 03_EXEMPLOS/
     ├── MANIFESTO.json
     └── VALIDACAO.md
 ```
@@ -47,12 +51,14 @@ Depois, siga esta ordem:
    as novas personas, suas tarefas e permissões. Diferencie a pessoa fictícia do perfil técnico.
 3. Preencher [02_REQUISITOS_E_FLUXOS.md](01_MODELOS/02_REQUISITOS_E_FLUXOS.md) com as funcionalidades,
    regras e jornadas que serão mantidas ou alteradas, antes de adaptar o banco ou as telas.
-4. Revisar [03_ESTRUTURA_E_ARQUITETURA.md](01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md) para definir
+4. **Mapa de telas e protótipo.** Preencher o [modelo](01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md)
+   e conectar as jornadas no protótipo clicável. Consulte o [exemplo preenchido do Cesta do Vale](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md).
+5. Revisar [03_ESTRUTURA_E_ARQUITETURA.md](01_MODELOS/03_ESTRUTURA_E_ARQUITETURA.md) para definir
    os diretórios, as tecnologias e as conexões do novo sistema.
-5. Usar [04_CHECKLIST_DE_CRIACAO.md](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md) para acompanhar o trabalho.
-6. Preencher [05_BRIEFING_PARA_IMPLEMENTACAO.md](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md)
+6. Usar [04_CHECKLIST_DE_CRIACAO.md](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md) para acompanhar o trabalho.
+7. Preencher [05_BRIEFING_PARA_IMPLEMENTACAO.md](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md)
    para reunir as decisões e indicar esse arquivo a quem implementará o projeto.
-7. Revisar os [19 padrões de lançamento](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) no planejamento e antes de publicar.
+8. Revisar os [19 padrões de lançamento](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) no planejamento e antes de publicar.
 
 Trocar apenas nomes e imagens é suficiente somente quando as tarefas, permissões e entidades
 permanecem equivalentes. Consulte `02_REFERENCIAS` como base técnica e copie para a aplicação
@@ -97,7 +103,7 @@ Não foram copiados `.env` reais, chaves, bancos, contas de usuários, ambientes
 
 Os links herdados para arquivos de código, imagens e apresentações podem depender do repositório
 de origem, pois esses materiais não compõem este pacote documental. O manifesto permite localizar
-o caminho original. Os cinco modelos acima são os documentos a preencher para o novo sistema.
+o caminho original. Preencha os modelos em `01_MODELOS` para o novo sistema.
 
 ## Acesso pela aplicação
 

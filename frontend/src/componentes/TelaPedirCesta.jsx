@@ -270,10 +270,10 @@ function TelaPedirCesta({
         <div className="cabecalho-acoes">
           <nav className="abas-pedido" aria-label="Navegação dos pedidos">
             <StarBorder className="aba-navegacao aba-ativa" type="button" aria-current="page">
-              Novo pedido
+              Pedir a cesta
             </StarBorder>
             <StarBorder className="aba-navegacao" type="button" onClick={aoAbrirHistorico}>
-              Histórico
+              Minhas cestas
             </StarBorder>
           </nav>
         </div>

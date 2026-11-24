@@ -43,9 +43,9 @@ function TelaDetalhesCesta({
       <main className="pagina-pedido">
         <section className="estado-vazio estado-vazio-historico">
           <h1>Cesta nao encontrada</h1>
-          <p>Volte ao historico para escolher outra cesta.</p>
+          <p>Volte a Minhas cestas para escolher outra cesta.</p>
           <StarBorder className="botao botao-primario" type="button" onClick={aoAbrirHistorico}>
-            Voltar ao historico
+            Voltar para Minhas cestas
           </StarBorder>
         </section>
       </main>
@@ -92,7 +92,7 @@ function TelaDetalhesCesta({
         <div className="cabecalho-acoes">
           <nav className="abas-pedido" aria-label="Navegacao dos pedidos">
             <StarBorder className="aba-navegacao" type="button" onClick={aoAbrirPedido}>
-              Novo pedido
+              Pedir a cesta
             </StarBorder>
             <StarBorder className="aba-navegacao aba-ativa" type="button" aria-current="page">
               Historico
@@ -251,7 +251,7 @@ function TelaDetalhesCesta({
       </section>
 
       <StarBorder className="botao botao-secundario" type="button" onClick={aoAbrirHistorico}>
-        Voltar ao historico
+        Voltar para Minhas cestas
       </StarBorder>
     </main>
   )

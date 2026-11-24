@@ -17,6 +17,15 @@ def agora():
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
+def gerar(sessao, conta, tipo, instante, validade):
+    token = token_urlsafe(32)
+    sessao.add(TokenConta(
+        usuario_id=conta.id, tipo=tipo, token_hash=sha256(token.encode()).hexdigest(),
+        criado_em=instante, expira_em=instante + validade,
+    ))
+    return token
+
+
 def emitir(sessao, conta, tipo):
     origem = email_conta.validar_configuracao()
     instante = agora()
@@ -24,11 +33,8 @@ def emitir(sessao, conta, tipo):
         TokenConta.usuario_id == conta.id, TokenConta.tipo == tipo,
         TokenConta.usado_em.is_(None),
     ).values(usado_em=instante))
-    token = token_urlsafe(32)
     minutos = 1440 if tipo == "confirmacao_email" else 30
-    sessao.add(TokenConta(usuario_id=conta.id, tipo=tipo,
-        token_hash=sha256(token.encode()).hexdigest(), criado_em=instante,
-        expira_em=instante + timedelta(minutes=minutos)))
+    token = gerar(sessao, conta, tipo, instante, timedelta(minutes=minutos))
     acao = "verificar-email" if tipo == "confirmacao_email" else "redefinir-senha"
     assunto = "Confirme seu e-mail" if tipo == "confirmacao_email" else "Redefina sua senha"
     if tipo == "confirmacao_email":

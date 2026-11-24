@@ -7,6 +7,13 @@
 - [ ] Definir escopo, entidades, estados, regras e critérios de aceite.
 - [ ] Definir identidade visual e necessidade de assistente/voz/e-mail.
 
+## Mapa de telas e protótipo
+
+- [ ] Decidir quais formas de entrada cada perfil precisa.
+- [ ] Registrar origem, ação, destino, acesso e estados de cada tela no [mapa](02A_MAPA_DE_TELAS_E_PROTOTIPO.md).
+- [ ] Conectar e percorrer as jornadas e as alternativas escolhidas no protótipo clicável.
+- [ ] Registrar o link do protótipo e as decisões pendentes antes de começar a implementação.
+
 ## Preparação do projeto
 
 - [ ] Criar pasta e repositório próprios.

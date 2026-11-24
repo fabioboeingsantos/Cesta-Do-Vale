@@ -6,13 +6,21 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from banco import obter_sessao
 from configuracao import obter_nome_cookie_jwt
-from esquemas.usuario import SolicitarEmail, ConfirmarToken, RedefinirSenha
+from esquemas.usuario import AtivarProdutor, SolicitarEmail, ConfirmarToken, RedefinirSenha
 from limites_autenticacao import limitador, obter_endereco_cliente
 from modelos.usuario import Usuario
-from servicos import email_conta, tokens_conta
+from servicos import convites, email_conta, tokens_conta
 
 router = APIRouter(prefix="/autenticacao", tags=["Autenticação"])
 MENSAGEM = "Se o e-mail estiver cadastrado e a solicitação for aplicável, enviaremos instruções."
+
+
+@router.post("/ativar-produtor")
+def ativar_produtor(dados: AtivarProdutor, requisicao: Request,
+                   sessao: Session = Depends(obter_sessao)):
+    limitar(requisicao, dados.token, "ativar-produtor")
+    convites.ativar(sessao, dados.token, dados.senha)
+    return {"mensagem": "Conta de produtor ativada. Entre com o usuário ou e-mail do convite."}
 
 
 def limitar(requisicao, chave, tipo):

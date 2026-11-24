@@ -11,7 +11,7 @@ const TAMANHOS = { pequena: 'Pequena', media: 'Média', grande: 'Grande' }
 const formatarDataColheita = (data) => data.split('-').reverse().join('/')
 
 // Esta é a tela principal do produtor, com as cestas filtradas para a separação da semana.
-function TelaSeparacao({ cestas, produtos = [], aoAbrirFechamento, aoMarcarEnviado, aoAtualizarEstoque, aoAtualizarPreco, aoAtualizarCategoria, aoAbrirCatalogo, aoAvaliarCesta, modo = 'separacao', aoAbrirEstoque, aoAbrirEntregas, aoVoltarSeparacao, filtrosConsulta, aoAbrirConsulta }) {
+function TelaSeparacao({ usuario, cestas, produtos = [], aoAbrirFechamento, aoMarcarEnviado, aoAtualizarEstoque, aoAtualizarPreco, aoAtualizarCategoria, aoAbrirCatalogo, aoAvaliarCesta, modo = 'separacao', aoAbrirEstoque, aoAbrirEntregas, aoVoltarSeparacao, filtrosConsulta, aoAbrirConsulta }) {
   const consulta = modo === 'consulta'
   const [filtroTamanho, setFiltroTamanho] = useState(consulta ? (TAMANHOS[filtrosConsulta?.tamanho] || 'todos') : 'todos')
   const [filtroProduto, setFiltroProduto] = useState(filtrosConsulta?.produto_id ?? '')
@@ -188,7 +188,7 @@ function TelaSeparacao({ cestas, produtos = [], aoAbrirFechamento, aoMarcarEnvia
         <header className="cabecalho-pagina">
           <div>
             <p className="marca-pequena">Cesta do Vale</p>
-            <p className="contexto-usuario">Vanderlei · produtor</p>
+            <p className="contexto-usuario">{usuario} · produtor</p>
           </div>
           <nav className="abas-pedido" aria-label="Navegação do produtor">
             <StarBorder className="aba-navegacao" type="button" aria-haspopup="dialog" onClick={aoAbrirCatalogo}>Catálogo</StarBorder>
@@ -211,7 +211,7 @@ function TelaSeparacao({ cestas, produtos = [], aoAbrirFechamento, aoMarcarEnvia
       <header className="cabecalho-pagina">
         <div>
           <p className="marca-pequena">Cesta do Vale</p>
-          <p className="contexto-usuario">Vanderlei · produtor</p>
+          <p className="contexto-usuario">{usuario} · produtor</p>
         </div>
 
         <div className="cabecalho-acoes">

@@ -173,6 +173,18 @@ function obterAssinaturaSeparacoes(cesta) {
     .join('|')
 }
 
+function lerLinkAcesso() {
+  const parametros = new URLSearchParams(window.location.hash.slice(1))
+  for (const [acao, modo] of [
+    ['verificar-email', 'verificar'],
+    ['redefinir-senha', 'redefinir'],
+    ['ativar-produtor', 'ativar'],
+  ]) {
+    if (parametros.has(acao)) return { token: parametros.get(acao), modo }
+  }
+  return { token: '', modo: '' }
+}
+
 // O login é a porta de entrada comum para as duas personas do sistema.
 function App() {
   const [tema, setTema] = useState(() => {
@@ -183,18 +195,23 @@ function App() {
     }
   })
   const [usuarioAutenticado, setUsuarioAutenticado] = useState('')
-  const [linkAcesso, setLinkAcesso] = useState(() => {
-    const parametros = new URLSearchParams(window.location.hash.slice(1))
-    const verificar = parametros.get('verificar-email')
-    const redefinir = parametros.get('redefinir-senha')
-    return { token: verificar || redefinir || '', modo: verificar ? 'verificar' : 'redefinir' }
-  })
-  const [dialogoAcesso, setDialogoAcesso] = useState(linkAcesso.token ? linkAcesso.modo : null)
+  const [linkAcesso, setLinkAcesso] = useState(lerLinkAcesso)
+  const [dialogoAcesso, setDialogoAcesso] = useState(linkAcesso.modo || null)
   useEffect(() => {
-    if (linkAcesso.token) {
+    if (linkAcesso.modo) {
       window.history.replaceState(null, '', window.location.pathname + window.location.search)
     }
   }, [linkAcesso])
+  useEffect(() => {
+    function abrirLinkAcesso() {
+      const link = lerLinkAcesso()
+      if (!link.modo) return
+      setLinkAcesso(link)
+      setDialogoAcesso(link.modo)
+    }
+    window.addEventListener('hashchange', abrirLinkAcesso)
+    return () => window.removeEventListener('hashchange', abrirLinkAcesso)
+  }, [])
   // Aguarda a validação do cookie antes de decidir se mostra o login ou a área autenticada.
   const [sessaoVerificada, setSessaoVerificada] = useState(false)
   const [erroRestauracao, setErroRestauracao] = useState('')
@@ -213,6 +230,7 @@ function App() {
   // Guarda a composição escolhida no histórico até a tela de novo pedido ser montada.
   const [pedidoParaRepetir, setPedidoParaRepetir] = useState(null)
   const [pedidoDestacadoNoHistorico, setPedidoDestacadoNoHistorico] = useState(null)
+  const [pedidoRecemCriado, setPedidoRecemCriado] = useState(null)
   const [pedidos, setPedidos] = useState([])
   const [produtosDisponiveis, setProdutosDisponiveis] = useState([])
   const [filtrosConsulta, setFiltrosConsulta] = useState(null)
@@ -524,6 +542,7 @@ function App() {
   // Encerra a sessão no servidor antes de limpar o estado autenticado da tela.
   function limparSessaoLocal() {
     setPedidoDestacadoNoHistorico(null)
+    setPedidoRecemCriado(null)
     setFiltrosConsulta(null)
     if (window.location.pathname === '/flora') {
       window.history.replaceState({}, '', window.history.state?.origem || '/')
@@ -619,6 +638,7 @@ function App() {
         }),
       })
       setPedidos((pedidosAtuais) => [adaptarCestaDaApi(cestaCriada), ...pedidosAtuais])
+      setPedidoRecemCriado(cestaCriada.id)
       carregarProdutosDoServidor()
       setMensagemApi(`Pedido registrado no backend. Total: ${formatarMoeda(cestaCriada.valor_total)}`)
     } catch (erro) {
@@ -949,7 +969,7 @@ function App() {
     return { sucesso: true }
   }
 
-  if (!usuarioAutenticado || linkAcesso.token) {
+  if (!usuarioAutenticado || linkAcesso.modo) {
     if (!sessaoVerificada) {
       return (
         <main className="pagina-inicial verificacao-sessao" role="status">
@@ -969,7 +989,7 @@ function App() {
         />
         {dialogoAcesso && (
           <TelaLogin
-            key={dialogoAcesso}
+            key={`${dialogoAcesso}:${linkAcesso.token}`}
             modoInicial={dialogoAcesso === 'flora' ? 'entrar' : dialogoAcesso}
             token={linkAcesso.token}
             aoSenhaRedefinida={limparSessaoLocal}
@@ -1165,6 +1185,7 @@ function App() {
     if (abaAtual === 'fechamento') {
       return envolverAreaAutenticada(
         <TelaFechamento
+          usuario={formatarNomeUsuario(usuarioAutenticado)}
           cesta={cestaSelecionada}
           aoAbrirSeparacao={() => setAbaAtual('separacao')}
           aoSalvarSeparacao={salvarSeparacao}
@@ -1177,6 +1198,7 @@ function App() {
     return envolverAreaAutenticada(
       <TelaSeparacao
         key={abaAtual === 'consulta' ? 'consulta' : 'operacao'}
+        usuario={formatarNomeUsuario(usuarioAutenticado)}
         cestas={cestasDaSemana}
         produtos={produtosDisponiveis}
         modo={['inicio', 'estoque', 'entregas', 'consulta'].includes(abaAtual) ? abaAtual : 'separacao'}
@@ -1216,8 +1238,12 @@ function App() {
   if (abaAtual === 'historico') {
     return envolverAreaAutenticada(
       <TelaHistoricoPedidos
-        pedidoDestacado={pedidoDestacadoNoHistorico}
-        aoExibirPedidoDestacado={() => setPedidoDestacadoNoHistorico(null)}
+        pedidoConfirmado={pedidoRecemCriado != null}
+        pedidoDestacado={pedidoRecemCriado ?? pedidoDestacadoNoHistorico}
+        aoExibirPedidoDestacado={() => {
+          setPedidoDestacadoNoHistorico(null)
+          setPedidoRecemCriado(null)
+        }}
         usuario={formatarNomeUsuario(usuarioAutenticado)}
         pedidos={pedidos}
         aoAbrirPedido={() => setAbaAtual('pedido')}

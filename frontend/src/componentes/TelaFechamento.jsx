@@ -27,6 +27,7 @@ const formatarMoeda = (valor) =>
 
 // Esta tela permite ao produtor ajustar e registrar todos os produtos de uma vez.
 function TelaFechamento({
+  usuario,
   cesta,
   aoAbrirSeparacao,
   aoSalvarSeparacao,
@@ -202,7 +203,7 @@ function TelaFechamento({
       <header className="cabecalho-pagina">
         <div>
           <p className="marca-pequena">Cesta do Vale</p>
-          <p className="contexto-usuario">Vanderlei · produtor</p>
+          <p className="contexto-usuario">{usuario} · produtor</p>
         </div>
 
         <div className="cabecalho-acoes">

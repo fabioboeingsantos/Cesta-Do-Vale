@@ -11,13 +11,9 @@ def validar_nova_senha(senha: str) -> str:
     return senha
 
 
-class DadosCadastroUsuario(BaseModel):
-    """Dados necessários para criar uma conta de assinante."""
-
+class IdentificacaoUsuario(BaseModel):
     usuario: str = Field(min_length=1, max_length=80)
     email: EmailStr
-    senha: str = Field(min_length=8, max_length=128)
-    _validar_senha = field_validator('senha')(validar_nova_senha)
 
     @field_validator('usuario', mode='before')
     @classmethod
@@ -27,6 +23,13 @@ class DadosCadastroUsuario(BaseModel):
             if '@' in valor:
                 raise ValueError('Use um nome de usuário sem @; informe o e-mail no campo próprio.')
         return valor
+
+
+class DadosCadastroUsuario(IdentificacaoUsuario):
+    """Dados necessários para criar uma conta de assinante."""
+
+    senha: str = Field(min_length=8, max_length=128)
+    _validar_senha = field_validator('senha')(validar_nova_senha)
 
 
 class DadosLogin(BaseModel):
@@ -60,6 +63,10 @@ class ConfirmarToken(BaseModel):
 class RedefinirSenha(ConfirmarToken):
     senha: str = Field(min_length=8, max_length=128)
     _validar_senha = field_validator('senha')(validar_nova_senha)
+
+
+class AtivarProdutor(RedefinirSenha):
+    token: str
 
 
 class SessaoUsuario(BaseModel):

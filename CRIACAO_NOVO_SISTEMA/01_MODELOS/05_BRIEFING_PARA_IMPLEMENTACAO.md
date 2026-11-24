@@ -13,6 +13,7 @@ com React/Vite no frontend e FastAPI/SQLAlchemy/Alembic no backend, salvo as dec
 - Personas e perfis: [preencher].
 - Tarefas e permissões: [referenciar a matriz preenchida].
 - Funcionalidades e regras: [referenciar requisitos preenchidos].
+- Mapa de telas e protótipo clicável: [referenciar mapa, link compartilhável e jornadas conferidas].
 - Domínio preservado ou substituído: [preencher].
 - Entidades e transições: [preencher].
 - Marca, linguagem e recursos visuais: [preencher].

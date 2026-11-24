@@ -47,7 +47,7 @@ function GuiaCestas({ aoCriarConta }) {
           <li><strong>Escolha seu tamanho</strong><p>Compare as três opções e veja quantas unidades cabem em cada cesta.</p></li>
           <li><strong>Decida o que levar</strong><p>Escolha a cesta pronta ou combine os produtos disponíveis no catálogo.</p></li>
           <li><strong>Acompanhe seu pedido</strong><p>Confirme a seleção e acompanhe a separação e a entrega pela sua conta.</p></li>
-        </ol><button type="button" className="vale-primario" onClick={aoCriarConta}>Criar conta grátis</button>
+        </ol><button type="button" className="vale-primario" onClick={aoCriarConta}>Criar conta de assinante</button>
       </div>
       <div className="vale-simulador"><img src={'/colheita/cesta-' + tamanho.id + '.webp'} alt={'Ilustração da cesta ' + tamanho.nome.toLowerCase()} width="512" height="512" loading="lazy" />
         <p className="vale-capacidade" role="status">Cesta {tamanho.nome.toLowerCase()} <span>·</span> {tamanho.limite} unidades</p>
@@ -185,7 +185,7 @@ export default function TelaInicio({ aoEntrar, aoCriarConta, aoAcessarFlora }) {
       <div className="vale-largura vale-hero-texto"><p className="vale-rotulo">Horta comunitária · Demonstração</p>
         <h1 id="titulo-inicial">Da horta,<br/><em>para a sua mesa.</em></h1>
         <p className="vale-chamada">Experimente montar uma cesta da semana e acompanhar um pedido de demonstração. O site não realiza cobranças.</p>
-        <div className="vale-acoes"><a className="vale-primario" href="#colheita">Explorar a colheita</a><button className="vale-secundario" onClick={aoCriarConta} type="button">Criar conta grátis</button></div>
+        <div className="vale-acoes"><a className="vale-primario" href="#colheita">Explorar a colheita</a><button className="vale-secundario" onClick={aoCriarConta} type="button">Criar conta de assinante</button></div>
       </div>
     </section>
     <Colheita /><GuiaCestas aoCriarConta={aoCriarConta} /><DestaqueFlora aoAcessarFlora={aoAcessarFlora} /><Duvidas /></main>

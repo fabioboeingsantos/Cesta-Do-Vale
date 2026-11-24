@@ -35,9 +35,11 @@ function TelaHistoricoPedidos({
   aoAbrirDetalhes,
   aoCancelarPedido,
   aoRepetirPedido,
+  pedidoConfirmado,
   pedidoDestacado,
   aoExibirPedidoDestacado,
 }) {
+  const [exibirConfirmacao] = useState(pedidoConfirmado)
   const [pedidoCancelando, setPedidoCancelando] = useState(null)
   const [erroCancelamento, setErroCancelamento] = useState('')
   const pedidosOrdenados = [...pedidos].sort((pedidoA, pedidoB) =>
@@ -76,10 +78,10 @@ function TelaHistoricoPedidos({
         <div className="cabecalho-acoes">
           <nav className="abas-pedido" aria-label="Navegação dos pedidos">
             <StarBorder className="aba-navegacao" type="button" onClick={aoAbrirPedido}>
-              Novo pedido
+              Pedir a cesta
             </StarBorder>
             <StarBorder className="aba-navegacao aba-ativa" type="button" aria-current="page">
-              Histórico
+              Minhas cestas
             </StarBorder>
           </nav>
         </div>
@@ -87,8 +89,9 @@ function TelaHistoricoPedidos({
 
       <section className="introducao-pedido" aria-labelledby="titulo-historico">
         <p className="texto-saudacao">Acompanhe seus pedidos</p>
-        <h1 id="titulo-historico">Histórico de pedidos</h1>
+        <h1 id="titulo-historico">Minhas cestas</h1>
         <p>Consulte seus pedidos e acompanhe a situação de cada cesta.</p>
+        {exibirConfirmacao && <p className="mensagem mensagem-sucesso" role="status">Pedido confirmado.</p>}
       </section>
 
       {pedidos.length === 0 ? (
@@ -164,7 +167,7 @@ function TelaHistoricoPedidos({
                 type="button"
                 onClick={() => aoAbrirDetalhes(pedido)}
               >
-                Ver detalhes e separacao
+                Ver detalhes e separação
               </StarBorder>
               <StarBorder
                 className="botao botao-secundario botao-repetir-pedido"

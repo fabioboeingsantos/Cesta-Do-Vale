@@ -302,8 +302,8 @@ Bearer quando presente e usa o cookie na ausência dele. Ao abrir ou atualizar a
 
 O logout remove o cookie e o token guardado pelo frontend; não revoga no servidor uma cópia já
 emitida do JWT. A redefinição de senha incrementa `versao_sessao` e invalida as sessões anteriores.
-Não há renovação automática de tokens. O cadastro público cria apenas assinantes; não existe
-interface administrativa de criação de produtores.
+Não há renovação automática de tokens. O cadastro público cria apenas assinantes. Para convidar
+novos produtores, use o [comando administrativo de emissão de convites](docs/FLUXOS.md#emitir-ou-reenviar-convite-de-produtor).
 
 Na cesta selecionável, o tamanho limita a quantidade de produtos diferentes (Pequena: 5, Média: 8, Grande: 12). Cada produto pode ter até 10 unidades; esse limite de unidades não reduz o número de produtos que cabem na cesta.
 

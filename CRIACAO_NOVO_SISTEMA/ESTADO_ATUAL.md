@@ -11,8 +11,14 @@ Foram sincronizadas 40 referências existentes e acrescentadas 12 referências, 
 Jangada, o roteiro de verificação da Flora e a configuração Playwright.
 O exemplo de ambiente conserva a cópia anterior. Seu conteúdo foi excluído da leitura e da sincronização.
 
-Os cinco arquivos de `01_MODELOS` continuam como formulários para definir o próximo sistema.
-Seus campos dependem das decisões do novo projeto.
+Os arquivos de `01_MODELOS` são formulários para definir o próximo sistema.
+
+## Acesso e protótipo
+
+O [mapa de telas do Cesta do Vale](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md) descreve o acesso
+implementado em 23/11/2026, com cadastro público para assinantes, login comum, recuperação de
+senha e ativação de produtores por convite administrativo. Use o
+[modelo de mapa e protótipo](01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md) entre requisitos e arquitetura.
 
 ## Caminhos atuais da Flora
 
@@ -59,7 +65,7 @@ aguardava confirmação de status por falta de acesso à equipe Vercel na conver
 
 ## Usar o pacote no próximo projeto
 
-1. Definir personas, permissões, entidades e jornadas nos cinco modelos.
+1. Definir personas, permissões, entidades, jornadas e telas nos modelos.
 2. Escolher quais recursos atuais reaproveitar, incluindo temas, voz e assistente.
 3. Registrar provedores, ordem de fallback, ferramentas e confirmação humana se houver IA.
 4. Adaptar nomes, URLs e infraestrutura ao novo projeto.

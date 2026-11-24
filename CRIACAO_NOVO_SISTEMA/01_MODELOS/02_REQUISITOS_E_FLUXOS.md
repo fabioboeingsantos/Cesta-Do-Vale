@@ -62,3 +62,5 @@ Não herdar automaticamente prazos, limites 5/8/12, unidades, categorias ou esta
 - Mensagens de indisponibilidade e comportamento após falha de todos os provedores: [preencher].
 
 O assistente não deve substituir autenticação, autorização ou validação determinística da API.
+
+Com as jornadas e os critérios de aceite definidos, preencha o [Mapa de telas e protótipo](02A_MAPA_DE_TELAS_E_PROTOTIPO.md) antes de definir a arquitetura.

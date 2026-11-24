@@ -27,6 +27,11 @@ Preencher as correspondências antes de renomear código ou adaptar o banco.
 
 ## Reaproveitar a estrutura técnica
 
+Depois de definir os [requisitos](01_MODELOS/02_REQUISITOS_E_FLUXOS.md), preencher o
+[Mapa de telas e protótipo](01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md) e conectar a jornada
+da demonstração. Use o [exemplo do Cesta do Vale](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md)
+para escolher estados e alternativas antes de definir a arquitetura.
+
 | Recurso existente | Adaptação necessária |
 | --- | --- |
 | React/Vite, cliente HTTP e componentes | Adaptar telas, navegação e estados ao novo fluxo |
@@ -43,7 +48,7 @@ existentes, obter também o código do repositório de origem e adaptar os arqui
 
 ## Implementar uma primeira versão demonstrável
 
-1. Preencher os cinco modelos com o escopo escolhido e as decisões técnicas.
+1. Preencher os modelos com o escopo escolhido e as decisões técnicas, usando a ordem do [roteiro](00_COMECE_AQUI.md#como-iniciar-um-novo-projeto).
 2. Preparar o repositório e o ambiente do novo projeto conforme as regras do evento.
 3. Implementar a entidade principal, as regras e uma rota utilizável.
 4. Integrar uma tela com carregamento, erro, resultado e confirmação quando houver gravação.
@@ -62,7 +67,7 @@ decisão de provedores ou ferramentas nos modelos do hackathon.
 Após preencher os modelos, usar esta instrução junto do tema recebido.
 
 > Ler `CRIACAO_NOVO_SISTEMA/00_COMECE_AQUI.md`, `HACKATHON.md`, `ESTADO_ATUAL.md`
-> e os cinco documentos preenchidos de `01_MODELOS`. Implementar a jornada e os critérios de
+> e os documentos preenchidos de `01_MODELOS`. Implementar a jornada e os critérios de
 > aceite definidos para o hackathon. Consultar `02_REFERENCIAS` para reaproveitar a estrutura
 > técnica e adaptar as regras ao domínio aprovado. Usar dados fictícios na demonstração e
 > registrar as verificações efetivamente executadas.

@@ -3,6 +3,14 @@ import { abrirInformacaoAtual } from './InformacoesLegais'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { chamarApi } from '../api'
 
+const rotasAcesso = {
+  recuperar: 'solicitar-recuperacao',
+  reenviar: 'reenviar-confirmacao',
+  verificar: 'verificar-email',
+  redefinir: 'redefinir-senha',
+  ativar: 'ativar-produtor',
+}
+
 // A mesma tela representa o acesso inicial de Aline e Vanderlei.
 function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entrar', aoFechar, token = '', aoSenhaRedefinida }) {
   // Mantém o modo atual e os valores preenchidos para controlar cada fluxo de acesso.
@@ -16,6 +24,7 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
   const [erro, setErro] = useState('')
   const [mensagem, setMensagem] = useState('')
   const [carregando, setCarregando] = useState(false)
+  const defineSenha = ['cadastro', 'redefinir', 'ativar'].includes(modo)
 
   const dialogoRef = useRef(null)
   const tituloRef = useRef(null)
@@ -54,23 +63,20 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
     setErro('')
     setMensagem('')
 
-    if (['recuperar', 'reenviar', 'verificar', 'redefinir'].includes(modo)) {
-      if (modo === 'redefinir' && senha !== confirmarSenha) {
-        setErro('A confirmação de senha precisa ser igual à senha.')
-        return
-      }
+    if (defineSenha && senha !== confirmarSenha) {
+      setErro('A confirmação de senha precisa ser igual à senha.')
+      return
+    }
+
+    if (rotasAcesso[modo]) {
+      const solicitaEmail = ['recuperar', 'reenviar'].includes(modo)
+      const corpo = solicitaEmail ? { email: email.trim().toLowerCase() } : { token, ...(defineSenha ? { senha } : {}) }
       setCarregando(true)
       try {
-        const rotas = { recuperar: 'solicitar-recuperacao', reenviar: 'reenviar-confirmacao', verificar: 'verificar-email', redefinir: 'redefinir-senha' }
-        const corpo = ['recuperar', 'reenviar'].includes(modo) ? { email: email.trim().toLowerCase() } : { token, ...(modo === 'redefinir' ? { senha } : {}) }
-        const resultado = await chamarApi(`/autenticacao/${rotas[modo]}`, { method: 'POST', body: JSON.stringify(corpo) })
-        setMensagem(resultado.mensagem)
+        const resultado = await chamarApi(`/autenticacao/${rotasAcesso[modo]}`, { method: 'POST', body: JSON.stringify(corpo) })
         if (modo === 'redefinir') aoSenhaRedefinida?.()
-        if (modo === 'verificar' || modo === 'redefinir') {
-          setModo('entrar')
-          setSenha('')
-          setConfirmarSenha('')
-        }
+        if (!solicitaEmail) trocarModo('entrar')
+        setMensagem(resultado.mensagem)
       } catch (falha) {
         setErro(falha.message)
       } finally {
@@ -89,13 +95,8 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
       return
     }
 
-    if (modo !== 'recuperar' && !senha) {
+    if (!senha) {
       setErro('Informe sua senha.')
-      return
-    }
-
-    if (modo === 'cadastro' && senha !== confirmarSenha) {
-      setErro('A confirmação de senha precisa ser igual à senha.')
       return
     }
 
@@ -121,10 +122,8 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
       setCarregando(false)
 
       if (resultado?.sucesso) {
+        trocarModo('entrar')
         setMensagem('Cadastro realizado. Você já pode entrar. A confirmação do e-mail é opcional.')
-        setModo('entrar')
-        setSenha('')
-        setConfirmarSenha('')
       } else {
         setErro(resultado?.erro ?? 'Não foi possível criar o cadastro.')
       }
@@ -136,11 +135,12 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
   // Escolhe o título exibido conforme o fluxo de acesso selecionado.
   const titulo = {
     entrar: 'Entre na sua conta',
-    cadastro: 'Crie seu cadastro',
+    cadastro: 'Crie sua conta de assinante',
     recuperar: 'Recupere sua senha',
     reenviar: 'Reenvie a confirmação',
     verificar: 'Confirme seu e-mail',
     redefinir: 'Escolha uma nova senha',
+    ativar: 'Ative sua conta de produtor',
   }[modo]
 
   // Renderiza os campos e as ações correspondentes ao modo de acesso atual.
@@ -164,9 +164,10 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
             <p className="rotulo-cartao">Acesso ao sistema</p>
             <h1 id="titulo-login" ref={tituloRef} tabIndex={-1}>{titulo}</h1>
             <p>
-              {modo === 'verificar' ? 'Clique em Confirmar e-mail para ativar sua conta.' :
+              {modo === 'verificar' ? 'Clique em Confirmar e-mail para verificar seu endereço.' :
                 ['recuperar', 'reenviar'].includes(modo) ? 'Informe o e-mail usado no cadastro para receber as instruções.' :
                 modo === 'redefinir' ? 'Digite e confirme sua nova senha, com 8 a 128 caracteres.' :
+                modo === 'ativar' ? 'Defina uma senha de 8 a 128 caracteres para a conta do convite.' :
                 modo === 'cadastro' ? <>Seu usuário e sua senha dão acesso à conta. Usamos o e-mail para confirmar o endereço e ajudar você a recuperar o acesso. <a href="#privacidade" onClick={consultarInformacao}>Política de privacidade</a> · <a href="#termos" onClick={consultarInformacao}>Termos da demonstração</a></> :
                 'Acesse com seu usuário ou e-mail e sua senha.'}
             </p>
@@ -209,7 +210,7 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
               </label>
             )}
 
-            {['entrar', 'cadastro', 'redefinir'].includes(modo) && (
+            {(modo === 'entrar' || defineSenha) && (
               <label className="campo-login">
                 <span>Senha</span>
                 <span className="campo-senha">
@@ -237,7 +238,7 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
               </label>
             )}
 
-            {['cadastro', 'redefinir'].includes(modo) && (
+            {defineSenha && (
               <label className="campo-login">
                 <span>Confirmar senha</span>
                 <span className="campo-senha">
@@ -279,11 +280,12 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
 
             <StarBorder className="botao botao-primario botao-login" type="submit" disabled={carregando}>
               {modo === 'entrar' && (carregando ? 'Validando...' : 'Entrar')}
-              {modo === 'cadastro' && 'Criar cadastro'}
+              {modo === 'cadastro' && 'Criar conta de assinante'}
               {modo === 'recuperar' && 'Recuperar senha'}
               {modo === 'reenviar' && 'Reenviar confirmação'}
               {modo === 'verificar' && 'Confirmar e-mail'}
               {modo === 'redefinir' && 'Salvar nova senha'}
+              {modo === 'ativar' && (carregando ? 'Ativando...' : 'Ativar conta de produtor')}
             </StarBorder>
           </form>
 
@@ -291,7 +293,7 @@ function TelaLogin({ aoEntrar, aoCadastrar, mensagemSistema, modoInicial = 'entr
             {modo === 'entrar' && (
               <>
                 <StarBorder type="button" onClick={() => trocarModo('cadastro')}>
-                  Criar cadastro
+                  Criar conta de assinante
                 </StarBorder>
                 <StarBorder type="button" onClick={() => trocarModo('recuperar')}>
                   Esqueci minha senha
