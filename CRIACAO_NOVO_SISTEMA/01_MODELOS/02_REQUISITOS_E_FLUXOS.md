@@ -24,6 +24,14 @@ Preencha após [definir as personas](01_DEFINICAO_E_PERSONAS.md).
 6. Acompanhamento e conclusão: [preencher].
 7. Cancelamento/correção e falhas: [preencher].
 
+## Mapa de telas e protótipo
+
+| Tela ou URL | Perfil e condição de acesso | Ação e dados | Destino | Estados alternativos |
+| --- | --- | --- | --- | --- |
+| [preencher] | [preencher] | [preencher] | [preencher] | [carregando, vazio, erro, negado, sucesso] |
+
+Desenhe um caminho clicável da primeira tela até o resultado. Inclua revisão antes de salvar, volta para edição, recuperação de erro e o caminho esperado no celular e no desktop. Vincule cada ação ao contrato ou critério de aceite correspondente.
+
 ## Estados e transições
 
 | Estado inicial | Ação | Perfil autorizado | Condição | Próximo estado | Efeito nos dados |

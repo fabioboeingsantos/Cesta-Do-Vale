@@ -1,6 +1,6 @@
 # Pendências do projeto Cesta do Vale
 
-Atualizado em **10/11/2026**. Itens marcados registram funcionalidades implementadas;
+Backlog de **10/11/2026**, reconciliado no pacote em **24/11/2026**. Itens marcados registram funcionalidades implementadas;
 os demais representam implementação ou validação pendente. Veja a
 [análise do sistema](docs/ANALISE_SISTEMA.md) para evidências e limites da revisão.
 
@@ -20,11 +20,12 @@ os demais representam implementação ou validação pendente. Veja a
 - [ ] Definir política de sessão e revogação no logout; atualmente um JWT copiado permanece válido.
 - [ ] Definir limite para `/assistente/analisar` e estado compartilhado do limitador em múltiplas instâncias.
 - [ ] Consolidar exemplos legados de ambiente e dependências com os arquivos usados por Docker/CI.
-- [ ] Executar E2E no navegador; a CI existente cobre pytest, lint e build, sem E2E ou bancos externos.
+- [x] Configurar Playwright desktop e celular na CI, com API simulada.
+- [ ] Validar a jornada completa no navegador com API e banco reais em ambiente de testes. Consulte as [evidências da revisão](../VALIDACAO.md).
 
 ## Assistente — próximas etapas
 
-Plataforma escolhida: **OpenRouter**. A integração com os agentes e o QA já está
+Provedor principal: **OpenRouter**, com reserva Gemini pela Jangada no modo externo. A integração com os agentes e o QA já está
 implementada. No registro anterior, a chave foi validada e o modo OpenRouter ativado localmente. Os testes
 fictícios de pedido do assinante e separação do produtor passaram com QA aprovado,
 usando `nvidia/nemotron-3.5-super-vl:free`, JSON estrito e permissões explícitas.

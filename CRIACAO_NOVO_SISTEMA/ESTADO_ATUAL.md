@@ -1,72 +1,25 @@
-# Estado de referência do Cesta do Vale
+# Estado técnico do Cesta do Vale
 
-Revisão documental de 16/11/2026. Commit de base `22d3fbd0bd1a5c99d9699536a27569bdde93e49f`.
-As referências foram comparadas com o checkout local do repositório indicado pelo usuário.
-O acesso à página do GitHub falhou nesta revisão. A comparação usa os arquivos disponíveis no workspace.
+Esta documentação foi consolidada em 24/11/2026. O roadmap descreve o checkout local `66a56f1`. Na revisão, `origin/master` estava em `578ec74`, com convites de produtor e prototipação. A referência remota não comprova o deploy.
 
-## Atualizações do pacote
+O Cesta do Vale usa React/Vite, FastAPI, SQLAlchemy e Alembic. O checkout documenta catálogo, pedidos, estoque, separação, entrega, autenticação, recuperação de conta, notificações e Flora. A configuração contempla SQLite local, MySQL no Compose e PostgreSQL/Supabase e Vercel na publicação. Veja o [roadmap](ROADMAP_ARQUITETURA.md) para a arquitetura completa e o [mapa de telas](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md) para a jornada de entrada.
 
-Foram sincronizadas 40 referências existentes e acrescentadas 12 referências, totalizando
-69 entradas no manifesto. As inclusões abrangem o diário `.docs`, os documentos do fallback
-Jangada, o roteiro de verificação da Flora e a configuração Playwright.
-O exemplo de ambiente conserva a cópia anterior. Seu conteúdo foi excluído da leitura e da sincronização.
+## Marcos da referência
 
-Os arquivos de `01_MODELOS` são formulários para definir o próximo sistema.
+- O fluxo recente da Flora inclui reiniciar a conversa pelo menu e consultar cestas com itens ainda por separar.
+- A landing e a documentação operacional descrevem a demonstração do Cesta do Vale.
+- O código de referência tem revisão Alembic `20261107_0015`. A revisão realmente aplicada depende do banco em uso.
+- A origem oferece cadastro público de assinante. O commit remoto posterior documenta convites administrativos para produtores.
 
-## Acesso e protótipo
+Os testes E2E existentes interceptam as chamadas à API. CI configurada não substitui evidência de execução, e E2E simulado não comprova a integração com API e banco reais.
 
-O [mapa de telas do Cesta do Vale](03_EXEMPLOS/MAPA_DE_TELAS_CESTA_DO_VALE.md) descreve o acesso
-implementado em 23/11/2026, com cadastro público para assinantes, login comum, recuperação de
-senha e ativação de produtores por convite administrativo. Use o
-[modelo de mapa e protótipo](01_MODELOS/02A_MAPA_DE_TELAS_E_PROTOTIPO.md) entre requisitos e arquitetura.
+## Riscos a reavaliar
 
-## Caminhos atuais da Flora
-
-| Uso | Implementação de origem | Comportamento |
+| Tema | Constatação na origem | Critério para reaproveitar |
 | --- | --- | --- |
-| Montar cesta | `backend/ia/pedido_cesta.py`, `modelos.py`, `ferramentas.py` | `POST /assistente/pedido` produz proposta estruturada. OpenRouter gratuito é principal e Gemini é reserva pela Jangada. A lista de tools está vazia. |
-| Ajustar composição | `backend/rotas/assistente.py` | A proposta pode receber rascunho. `POST /assistente/pedido/substituicao` valida a escolha de substituição. |
-| Consultar pedidos, catálogo e colheita | `backend/ia/consultas.py`, `servico.py` | `POST /assistente/analisar` resolve consultas reconhecidas com dados autorizados do sistema. O caminho restante usa o modo simulado ou o fluxo externo configurado. |
-| Fluxo externo de análise | `backend/ia/fluxo.py`, `provedores/jangada_fallback.py` | O código existente mantém etapas por papéis, com OpenRouter e reserva Gemini. A montagem pela rota `/pedido` usa sua chamada estruturada própria. |
-| Confirmar | `frontend/src/App.jsx` | A pessoa confere a proposta e confirma pelas rotas existentes de negócio. |
-| Ouvir resposta | `POST /assistente/voz` | A rota exige autenticação e limita solicitações de áudio. |
+| Estoque e notificações | A análise estática aponta risco de efeitos duplicados em transições concorrentes. | Testar as transições no banco de destino e garantir um único efeito por operação. |
+| Migrações e acesso ao banco | A cadeia contém um ponto de compatibilidade de chave estrangeira SQLite a verificar. `stamp` apenas registra a revisão no histórico. | Testar banco vazio e atualização e verificar permissões e RLS quando aplicável. |
+| Sessões e limites | O logout limpa credenciais do cliente, enquanto um JWT existente pode continuar válido até expirar ou ser invalidado. O limitador é mantido em memória por processo. | Definir validade, revogação e limites adequados à quantidade de instâncias. |
+| Cobertura integrada | Os testes de navegador interceptam a API. | Exercitar a jornada com API e banco isolados em homologação. |
 
-Os documentos antigos sobre OpenAI ou planejamento de múltiplos agentes devem ser interpretados
-com a data e o escopo de cada registro. Para planejar a montagem atual, consultar
-[`.docs/ia.md`](02_REFERENCIAS/.docs/ia.md) e [`.docs/arquitetura.md`](02_REFERENCIAS/.docs/arquitetura.md).
-
-## Comportamentos recentes e situação no Git
-
-- O commit `8b644f1`, incluído na base, permite mencionar e exibir os três pedidos mais recentes
-  da conta para repetir composição. Quando houver menos de três, apresentar os disponíveis.
-  Uma pergunta com número explícito restringe a consulta ao pedido escolhido.
-- O commit de base `22d3fbd` aplica o fundo do tema aos cartões de estoque, corrigindo o contraste.
-- O checkout contém um ajuste local para reconhecer “Quantas cestas faltam separar essa semana ainda?”.
-  A consulta conta cestas abertas da semana com saldo por separar e soma os itens faltantes.
-- O checkout também contém alterações locais do botão Menu da Flora, que reinicia o ciclo,
-  e seu teste de navegador, além de uma alteração de largura da página e configuração local Playwright.
-
-As alterações locais acima foram registradas no commit `64c8bc7` após a revisão documental.
-Conferir o deploy desse commit antes de tratá-las como parte da versão publicada.
-
-## Interface, execução e verificação
-
-O frontend usa React/Vite, temas claro e escuro e o componente `StarBorder` para os botões.
-Usar as variáveis de tema para combinar fundo e texto dos componentes.
-
-O workflow `.github/workflows/ci.yml` define testes Python, lint, testes unitários JavaScript,
-E2E Playwright e build. O frontend inclui `test` e `test:e2e` no `package.json`.
-Consultar a [configuração Playwright](02_REFERENCIAS/frontend/playwright.config.js) para os projetos
-e servidores utilizados. A definição do workflow descreve as verificações configuradas.
-
-A revisão atual conferiu cópias, hashes e links dos documentos novos. Os resultados de testes
-datados nas referências pertencem às respectivas execuções. O deploy da correção de contraste
-aguardava confirmação de status por falta de acesso à equipe Vercel na conversa.
-
-## Usar o pacote no próximo projeto
-
-1. Definir personas, permissões, entidades, jornadas e telas nos modelos.
-2. Escolher quais recursos atuais reaproveitar, incluindo temas, voz e assistente.
-3. Registrar provedores, ordem de fallback, ferramentas e confirmação humana se houver IA.
-4. Adaptar nomes, URLs e infraestrutura ao novo projeto.
-5. Executar as verificações previstas no checklist e registrar evidências próprias.
+Consulte a [análise de sistema](02_REFERENCIAS/docs/ANALISE_SISTEMA.md), a [validação](VALIDACAO.md) e a [revisão por arquivo](REVISAO_DOCUMENTAL.md) para contexto e limites das evidências.

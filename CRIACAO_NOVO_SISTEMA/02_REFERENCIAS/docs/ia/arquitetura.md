@@ -1,5 +1,7 @@
 # Flora — arquitetura da assistente de IA
 
+Este registro detalha o fluxo de análise reorganizado em 07/11/2026 e preserva um fluxograma de evolução. Consulte o [guia consolidado da Flora](../../../FLORA_FLUXO_POSSIBILIDADES_E_TESTES.md) para o fallback vigente e a rota própria de montagem.
+
 Nome público: **Flora**. O botão de acesso é **Falar com a Flora**.
 A apresentação é: “Olá! Sou a Flora, a assistente virtual do Cesta do Vale.
 Como posso ajudar?”. Os nomes técnicos de arquivos e endpoints permanecem `assistente`.

@@ -4,7 +4,7 @@
 
 Este documento registra o roteiro para demonstrar em sala como a Jangada tenta um provedor principal e, diante de certos erros, passa automaticamente a um provedor reserva.
 
-O exemplo usa **OpenRouter como principal** e **Gemini como reserva**. Ele está implementado no utilitário de terminal [`chat_jangada.py`](../../chat_jangada.py). Essa integração serve para a demonstração e **não ativa fallback no assistente do site**, cujo backend permanece configurado separadamente.
+O exemplo histórico usa **OpenRouter como principal** e **Gemini como reserva** em um utilitário de terminal da demonstração. Os comandos abaixo descrevem aquela execução, que dependia de `chat_jangada.py`. Para reproduzir com os arquivos do checkout de referência, consulte o [teste isolado](fallback.ia.md) ou o script `backend/testar_jangada.py` no repositório de origem. O [guia de configuração](configuracao.md) descreve o fallback do site.
 
 ## Como o fluxo funciona
 

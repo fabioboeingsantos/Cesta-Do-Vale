@@ -1,6 +1,6 @@
 # Flora — fluxo, possibilidades e testes
 
-Este documento consolida a referência da Flora existente no Cesta do Vale para apoiar a criação ou adaptação de outro sistema. Ele descreve o comportamento documentado no projeto de origem; permissões, dados, regras e integrações devem ser redefinidos para o novo domínio.
+Revisado em 24/11/2026 com a base do [roadmap de arquitetura](ROADMAP_ARQUITETURA.md). Use o fluxo como referência técnica e redefina permissões, dados, regras e integrações para o novo domínio.
 
 ## 1. Papel da Flora
 
@@ -29,11 +29,11 @@ No projeto de origem, envio de cesta, encerramento com faltantes e desfazer sepa
 ## 3. Fluxo ponta a ponta
 
 1. A pessoa abre a Flora e envia uma mensagem escrita ou dita.
-2. O frontend envia a solicitação autenticada para `POST /assistente/analisar`.
+2. O frontend envia conversas e consultas a `POST /assistente/analisar`. A opção **Montar cesta** usa `POST /assistente/pedido`. A escolha de substituição usa `POST /assistente/pedido/substituicao`.
 3. O backend identifica conta e perfil pela sessão e verifica a permissão `assistente.usar`.
 4. O serviço determina o modo da assistente e prepara contexto permitido: catálogo e dados associados à conta/perfil.
 5. Consultas operacionais reconhecidas podem ser respondidas localmente com dados do banco, sem depender do modelo.
-6. Para outras mensagens, o modo OpenRouter executa intérprete, especialista do perfil e QA em sequência. O modo simulado usa regras locais.
+6. Para análise externa, o fluxo passa por intérprete, especialista do perfil e QA em sequência. A montagem tem um caminho próprio de proposta estruturada com catálogo, regras, rascunho opcional e ferramentas vazias. O modo simulado usa regras locais. A Jangada pode trocar OpenRouter por Gemini em falhas elegíveis quando o fallback está ativado.
 7. A validação determinística do backend pode bloquear propostas que o modelo aprovou, por exemplo por falta de estoque, limite inválido, produto inexistente ou ação proibida.
 8. Se houver proposta aprovada, o frontend apresenta uma prévia clara, com os dados relevantes e ação explícita de confirmar ou cancelar.
 9. Ao confirmar, o frontend chama o fluxo/rota de negócio existente. O backend revalida estado atual, permissões, estoque e composição antes de persistir.
@@ -43,7 +43,11 @@ No projeto de origem, envio de cesta, encerramento com faltantes e desfazer sepa
 flowchart TD
   A[Mensagem escrita ou voz] --> B[Frontend envia solicitação autenticada]
   B --> C[Backend verifica sessão, perfil e permissão]
-  C --> D[Prepara contexto autorizado]
+  C --> X{Montar cesta?}
+  X -->|Sim| Y[Proposta estruturada ou ajuste local]
+  Y --> Z[Validação local]
+  Z --> J
+  X -->|Análise geral| D[Prepara contexto autorizado]
   D --> E{Consulta operacional reconhecida?}
   E -->|Sim| F[Consulta dados atuais sem gravar]
   E -->|Não| G[Interpretar solicitação]
@@ -65,7 +69,8 @@ flowchart TD
 - `backend/ia/agentes/`: intérprete, especialista de assinante/produtor e QA.
 - `backend/ia/validacao.py`: regras determinísticas da proposta.
 - `backend/ia/consultas.py`: consultas operacionais locais.
-- `backend/ia/provedores/`: interface, OpenRouter e modo simulado.
+- `backend/ia/pedido_cesta.py`, `modelos.py` e `ferramentas.py`: proposta, rascunho e seleção de provedores no fluxo de montagem.
+- `backend/ia/provedores/`: contratos, modo simulado e integração Jangada para o fluxo de análise.
 - `backend/ia/prompts/`: instruções por papel.
 - `frontend/src/funcionalidades/assistente/Assistente.jsx`: conversa, prévia e confirmação.
 - `frontend/src/funcionalidades/assistente/api.js`: integração com API.
@@ -77,9 +82,9 @@ Os caminhos são da aplicação de origem; não os copie sem confirmar a estrutu
 - A interface pode oferecer microfone para fala em texto, com revisão antes do envio, e síntese de voz para a resposta.
 - A voz não confirma operações. A confirmação continua sendo uma ação explícita na tela.
 - A síntese pode usar voz do navegador ou um provedor externo configurado; disponibilidade e qualidade dependem do ambiente.
-- A arquitetura documenta memória de conversa persistida como evolução separada. Não confundir histórico de pedidos com memória conversacional.
+- A conversa fica em memória no frontend. O menu reinicia o contexto, enquanto pedidos salvos continuam no histórico da conta.
 - O fluxo de agentes atual descrito na arquitetura chama QA antes da validação local. O fluxograma evolutivo que coloca validação antes do QA não representa o comportamento atual.
-- Cada solicitação no modo OpenRouter pode gerar três chamadas sequenciais; registrar custo, timeout, limites e comportamento de indisponibilidade ao planejar outro sistema.
+- O fluxo externo de análise pode acionar três etapas sequenciais, cada uma sujeita a tentativas e fallback. Registrar custo, timeout, limites e comportamento de indisponibilidade.
 
 ## 6. Regras que devem ser preservadas
 
@@ -146,8 +151,7 @@ Referências na pasta `02_REFERENCIAS/`:
 - `docs/FLUXOS.md`: jornadas gerais de assinante/produtor.
 - `backend/CASOS_DE_TESTE.md`: casos de autenticação e permissões.
 - `docs/ANALISE_SISTEMA.md`: lacunas técnicas e validações pendentes.
-- `frontend/tests/e2e/flora.spec.js`: E2E de interface da Flora.
-- `backend/tests/ia/` e `backend/tests/test_assistente_pedido.py`: testes da API e regras da assistente.
+- Na origem, `frontend/tests/e2e/flora.spec.js` cobre a interface com API simulada; `backend/tests/ia/` e `backend/tests/test_assistente_pedido.py` cobrem API e regras.
 
 Os resultados nesses arquivos são evidência histórica do projeto de origem, não garantia de que os testes estejam passando no novo projeto. A análise de sistema também registra validação completa no navegador e provedores externos como pendências operacionais.
 

@@ -1,5 +1,7 @@
 # Definição e personas do novo sistema
 
+Use as jornadas do [roadmap de referência](../ROADMAP_ARQUITETURA.md#2-jornadas-e-regras-que-atravessam-as-camadas) para distinguir persona, identidade da conta, perfil técnico e propriedade dos registros.
+
 Status: modelo a preencher. Campos entre colchetes exigem uma decisão.
 
 ## Identificação

@@ -1,11 +1,12 @@
 # Briefing para implementar o novo sistema
 
+Anexe o mapa de telas, os contratos, os critérios de aceite e o plano de ambientes preenchidos para o novo domínio. Referencie o [roadmap](../ROADMAP_ARQUITETURA.md) e o [passo a passo](../PASSO_A_PASSO_PROJETO.md) como exemplos técnicos.
+
 Preencha os campos e entregue este documento junto dos modelos anteriores.
 
 ## Solicitação
 
-Criar o sistema **[nome]** usando como referência a organização técnica do Cesta do Vale,
-com React/Vite no frontend e FastAPI/SQLAlchemy/Alembic no backend, salvo as decisões abaixo.
+Criar o sistema **[nome]** para **[público]**, com a jornada principal **[resultado esperado]** e as tecnologias aprovadas abaixo.
 
 ## Decisões aprovadas
 
@@ -17,7 +18,7 @@ com React/Vite no frontend e FastAPI/SQLAlchemy/Alembic no backend, salvo as dec
 - Domínio preservado ou substituído: [preencher].
 - Entidades e transições: [preencher].
 - Marca, linguagem e recursos visuais: [preencher].
-- Banco, sessão, infraestrutura e CI: [preencher].
+- Frontend, backend, banco, sessão, infraestrutura e CI: [preencher os componentes adotados].
 - Assistente e integrações opcionais: [preencher].
 - Critérios de aceite: [preencher].
 
@@ -33,5 +34,4 @@ com React/Vite no frontend e FastAPI/SQLAlchemy/Alembic no backend, salvo as dec
 
 ## Entrega esperada
 
-Código organizado, banco/migrações próprios, testes, configuração de ambiente sem segredos,
-instruções de execução, fluxos documentados, evidências de validação e pendências explícitas.
+Código, configuração de ambiente sem segredos, instruções de execução, fluxos, testes e evidências. Para projetos com persistência, inclua esquema e migrações. Registre as pendências no checklist.

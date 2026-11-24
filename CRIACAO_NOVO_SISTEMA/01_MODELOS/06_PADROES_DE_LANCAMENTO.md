@@ -32,6 +32,8 @@ Use na definição do projeto e repita na versão candidata à publicação. Pre
 
 ## Referências
 
+- [Exemplo técnico de privacidade operacional](../02_REFERENCIAS/docs/PRIVACIDADE_OPERACIONAL.md).
+
 - [Lei Geral de Proteção de Dados](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm)
 - [Guia de cookies da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia_orientativo_cookies_e_protecao_de_dados_pessoais)
 - [Código de Defesa do Consumidor](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm) e [Decreto de comércio eletrônico](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d7962.htm)

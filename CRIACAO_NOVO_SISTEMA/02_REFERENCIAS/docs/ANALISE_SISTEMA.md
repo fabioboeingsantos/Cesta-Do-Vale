@@ -1,5 +1,8 @@
 # Análise do sistema Cesta do Vale
 
+Evidências de 10/11/2026 preservadas. As referências à cobertura de CI foram atualizadas em
+24/11/2026. Consulte o [roadmap de arquitetura](../../ROADMAP_ARQUITETURA.md) para o estado consolidado.
+
 Revisão: **10/11/2026**. Escopo: leitura do código, configurações, migrações, testes e documentação;
 execução do lint e build do frontend. Esta revisão atualiza a documentação e o backlog.
 Não altera regras de negócio, credenciais ou ambientes publicados.
@@ -47,12 +50,11 @@ reexecutada com Python 3.12 e `backend/requirements-dev.txt` instalados em um am
 | Notificações | Aviso de envio persistido e marcação de leitura | A tela também cria avisos locais; atualização por polling de oito segundos |
 | Flora | Consultas locais, histórico, proposta, QA e confirmação | Operações autorizadas: pedido, consulta e separação; não executa todos os comandos manuais |
 | Voz | Transcrição no navegador, revisão e confirmação explícita; síntese navegador ou Google | Google depende de credenciais/faturamento; voz não é garantida em todo navegador |
-| CI | Backend com pytest, frontend com lint e build | Sem etapa E2E, banco MySQL/PostgreSQL ou teste de Compose |
+| CI | Backend com pytest, frontend com lint, testes unitários, Playwright e build | Playwright simula a API. A integração com MySQL, PostgreSQL ou Compose precisa de execução própria. |
 
-Fontes: [rotas](../backend/rotas/), [serviços](../backend/servicos/),
-[validadores da IA](../backend/ia/validacao.py), [aplicação React](../frontend/src/App.jsx),
-[assistente](../frontend/src/funcionalidades/assistente/Assistente.jsx) e
-[CI](../.github/workflows/ci.yml).
+Fontes no repositório original: `backend/rotas/`, `backend/servicos/`,
+`backend/ia/validacao.py`, `frontend/src/App.jsx` e `frontend/src/funcionalidades/assistente/Assistente.jsx`.
+O pacote inclui a [configuração de CI](../.github/workflows/ci.yml).
 
 ## Lacunas documentais corrigidas
 
@@ -92,9 +94,9 @@ do pedido, ou usar transições condicionais que garantam um único vencedor, in
 de estoque e notificação na mesma transação. Não presumir que a proteção da reserva inicial
 resolve as transições posteriores.
 
-Fontes: [serviço de cestas](../backend/servicos/cesta.py), funções `cancelar_cesta`,
+Fontes na origem: `backend/servicos/cesta.py`, funções `cancelar_cesta`,
 `encerrar_separacao_com_faltantes` e `marcar_enviado`;
-[repositório](../backend/repositorios/cesta.py), função `atualizar_cesta`.
+`backend/repositorios/cesta.py`, função `atualizar_cesta`.
 
 ### Alta — conferir proteção efetiva do banco publicado
 
@@ -128,8 +130,8 @@ outra condição de invalidação já aplicada pelo backend.
 é desejada por sessão/dispositivo. Adicionar teste de reutilização do token após logout conforme
 essa decisão. Não declarar logout com revogação sem implementar e verificar o comportamento.
 
-Fontes: [autenticação](../backend/rotas/autenticacao.py),
-[cliente HTTP](../frontend/src/api.js), [tokens de conta](../backend/servicos/tokens_conta.py).
+Fontes na origem: `backend/rotas/autenticacao.py`, `frontend/src/api.js` e
+`backend/servicos/tokens_conta.py`.
 
 ### Média — limitar consumo e garantir consistência entre instâncias
 
@@ -143,8 +145,8 @@ O limite de voz por processo não representa um teto financeiro global do Google
 
 ### Média — ampliar a verificação de entrega
 
-O workflow executa pytest, lint e build; não cobre browser E2E ou a integração completa com bancos
-de produção. `/health` e `/saude` retornam respostas estáticas sem testar o banco.
+O workflow atual inclui pytest, lint, testes unitários, Playwright com API simulada e build.
+A jornada com API e banco reais exige homologação. `/health` e `/saude` indicam se a API responde.
 
 **Próximo passo:** executar cadastro/login, compra, cancelamento, separação parcial, envio,
 notificação, entrega e avaliação com dois perfis no navegador. Validar também isolamento entre

@@ -125,7 +125,7 @@ da conversa e a voz já configurada. Não foram adicionados serviços de voz em 
 
 ## Arte criada para esta direção
 
-![Núcleo botânico da Flora](../../frontend/public/marca/flora-do-vale-nucleo-v1.png)
+O arquivo original do núcleo botânico está em `frontend/public/marca/flora-do-vale-nucleo-v1.png` no repositório de origem.
 
 Arte original gerada com a ferramenta integrada de imagens, em PNG com fundo
 transparente. Caminho: `frontend/public/marca/flora-do-vale-nucleo-v1.png`.

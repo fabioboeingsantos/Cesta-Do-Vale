@@ -1,6 +1,6 @@
 # Estrutura e arquitetura do novo sistema
 
-Modelo baseado em React/Vite e FastAPI/SQLAlchemy. Confirme a escolha antes de implementar.
+Modelo baseado em React/Vite e FastAPI/SQLAlchemy. Confirme a escolha antes de implementar. Consulte o [roadmap do projeto de referência](../ROADMAP_ARQUITETURA.md) para comparar jornadas, fronteiras e critérios de aceite.
 
 ## Estrutura de raiz proposta
 
@@ -54,7 +54,7 @@ novo-sistema/
 Navegador → frontend → API → serviços/repositórios → banco.
 No Docker, o Caddy serve o build e encaminha `/api` à API. Na configuração Vercel de referência,
 o rewrite da tela aponta para um projeto separado da API. Escolha a estratégia do novo sistema.
-O backend carrega o `.env` da raiz; o Vite usa o ambiente de `frontend`.
+O backend de referência preserva variáveis do processo, carrega `.env` da raiz e depois `backend/.env`. O Vite usa o ambiente de `frontend`.
 
 ## Reutilizar e adaptar
 
@@ -83,6 +83,9 @@ cadeia completa e trate as pendências descritas na análise do projeto de orige
 - Hospedagem da tela/API e rewrite: [preencher].
 - SMTP e provedores opcionais: [preencher].
 - CI: versões de runtime, branch principal e comandos: [preencher].
+- Estados do domínio, limites transacionais e estratégia para repetição e concorrência: [preencher].
+- Homologação e produção: migração, rollback, restauração de backup, monitoramento e responsáveis: [preencher].
+- Dados enviados a terceiros, retenção e política de logs: [preencher].
 - Proteção da pasta interna no servidor de desenvolvimento: [confirmar].
 
 As cópias de configuração em `02_REFERENCIAS` contêm nomes e destinos do Cesta do Vale.

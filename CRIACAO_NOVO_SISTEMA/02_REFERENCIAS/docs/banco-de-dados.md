@@ -2,7 +2,7 @@
 
 ## 1. Configuração
 
-A conexão é centralizada em [`../backend/banco.py`](../backend/banco.py) e configurada por variáveis de ambiente. O projeto suporta SQLite para desenvolvimento e PostgreSQL/Supabase conforme o ambiente.
+A conexão é centralizada em `backend/banco.py` na origem. O projeto usa SQLite para desenvolvimento, MySQL no Compose e PostgreSQL/Supabase conforme o ambiente. [Roadmap e topologia](../../ROADMAP_ARQUITETURA.md)
 
 ## 2. Entidades
 
@@ -10,24 +10,29 @@ A conexão é centralizada em [`../backend/banco.py`](../backend/banco.py) e con
 |---|---|
 | `usuarios` | Contas, credenciais e perfil de acesso. |
 | `produtos` | Catálogo e estoque disponível. |
-| `cestas` | Pedido principal da assinante e seu status. |
-| `itens_cesta` | Produtos e quantidades escolhidos em uma cesta. |
+| `cestas` | Pedido principal, estado, marcos de separação e envio, avaliações por perfil. |
+| `itens_cesta` | Produtos, quantidades e preço unitário registrado na criação. |
 | `separacoes` | Quantidades já separadas pelo produtor. |
+| `tokens_conta` | Hashes de tokens de uso único para confirmação e recuperação. |
+| `notificacoes` | Avisos persistidos ligados à conta e à cesta. |
 
 ## 3. Relacionamentos
 
 ```mermaid
 erDiagram
-    USUARIOS ||--o{ CESTAS : cria
+    USUARIOS o|--o{ CESTAS : cria
     CESTAS ||--|{ ITENS_CESTA : possui
     PRODUTOS ||--o{ ITENS_CESTA : compoe
     CESTAS ||--o{ SEPARACOES : recebe
     PRODUTOS ||--o{ SEPARACOES : separado
+    USUARIOS ||--o{ TOKENS_CONTA : recebe
+    USUARIOS ||--o{ NOTIFICACOES : recebe
+    CESTAS ||--o{ NOTIFICACOES : origina
 ```
 
 ## 4. Regras de integridade
 
-- `cestas.usuario_id` referencia `usuarios.id`.
+- `cestas.usuario_id` referencia `usuarios.id` e aceita nulo para compatibilidade com registros antigos.
 - `itens_cesta.cesta_id` referencia `cestas.id` com exclusão em cascata.
 - `itens_cesta.produto_id` referencia `produtos.id`.
 - `separacoes.cesta_id` referencia `cestas.id` com exclusão em cascata.
@@ -36,7 +41,7 @@ erDiagram
 
 ## 5. Migrações
 
-As alterações do schema estão versionadas em [`../backend/migracoes/versions/`](../backend/migracoes/versions/). Os modelos SQLAlchemy ficam em [`../backend/modelos/`](../backend/modelos/).
+Na origem, o Alembic versiona as mudanças em `backend/migracoes/versions/`, com revisão `20261107_0015` nesta base. Os modelos SQLAlchemy ficam em `backend/modelos/`. Valide a cadeia no banco escolhido e verifique as políticas de acesso no ambiente de destino.
 
 ## 6. Diagrama complementar
 

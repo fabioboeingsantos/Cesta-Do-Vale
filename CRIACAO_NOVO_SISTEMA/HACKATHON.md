@@ -1,7 +1,6 @@
 # Preparar a base para o hackathon
 
-Usar este roteiro ao receber o tema. Consultar [ESTADO_ATUAL.md](ESTADO_ATUAL.md) para conhecer
-os recursos implementados e preencher os documentos em `01_MODELOS` com as decisões da equipe.
+Usar este roteiro ao receber o tema. Consultar o [roadmap](ROADMAP_ARQUITETURA.md), o [passo a passo](PASSO_A_PASSO_PROJETO.md) e o [estado técnico](ESTADO_ATUAL.md), depois preencher os modelos com as decisões da equipe.
 
 ## Definir o desafio
 
@@ -48,7 +47,7 @@ existentes, obter também o código do repositório de origem e adaptar os arqui
 
 ## Implementar uma primeira versão demonstrável
 
-1. Preencher os modelos com o escopo escolhido e as decisões técnicas, usando a ordem do [roteiro](00_COMECE_AQUI.md#como-iniciar-um-novo-projeto).
+1. Preencher os modelos com o escopo, o mapa de telas, as decisões técnicas e o checklist de lançamento.
 2. Preparar o repositório e o ambiente do novo projeto conforme as regras do evento.
 3. Implementar a entidade principal, as regras e uma rota utilizável.
 4. Integrar uma tela com carregamento, erro, resultado e confirmação quando houver gravação.
@@ -66,8 +65,9 @@ decisão de provedores ou ferramentas nos modelos do hackathon.
 
 Após preencher os modelos, usar esta instrução junto do tema recebido.
 
-> Ler `CRIACAO_NOVO_SISTEMA/00_COMECE_AQUI.md`, `HACKATHON.md`, `ESTADO_ATUAL.md`
-> e os documentos preenchidos de `01_MODELOS`. Implementar a jornada e os critérios de
+> Ler `CRIACAO_NOVO_SISTEMA/00_COMECE_AQUI.md`, `ROADMAP_ARQUITETURA.md`,
+> `PASSO_A_PASSO_PROJETO.md`, `HACKATHON.md` e os modelos preenchidos em `01_MODELOS`.
+> Implementar a jornada e os critérios de
 > aceite definidos para o hackathon. Consultar `02_REFERENCIAS` para reaproveitar a estrutura
 > técnica e adaptar as regras ao domínio aprovado. Usar dados fictícios na demonstração e
 > registrar as verificações efetivamente executadas.

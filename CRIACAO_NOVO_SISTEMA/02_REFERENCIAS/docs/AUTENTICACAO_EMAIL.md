@@ -3,7 +3,7 @@
 Documentação revisada em **10/11/2026** conforme o código. O envio real requer um provedor SMTP
 configurado no backend; esta revisão não executou entrega real de e-mails.
 
-Guia em PDF: [passo a passo de e-mail](../output/pdf/passo_a_passo_email.pdf).
+O guia em PDF está em `output/pdf/passo_a_passo_email.pdf` no repositório de origem.
 
 ## Comportamento
 
@@ -27,7 +27,8 @@ Guia em PDF: [passo a passo de e-mail](../output/pdf/passo_a_passo_email.pdf).
 
 Preencha no ambiente do backend (ou `.env` da raiz no desenvolvimento):
 
-`backend/.env` e `.env.local` não são carregados automaticamente pelo backend.
+Na base revisada, o backend preserva as variáveis do processo, lê `.env` da raiz e complementa
+com `backend/.env`. O carregador da API não usa `.env.local`.
 Na Vercel, configure as variáveis no projeto da **API**, no ambiente desejado, e faça um novo
 deploy para aplicá-las. `EMAIL_FRONTEND_URL` deve apontar para a tela, sem `/api` ou barra final.
 Para desenvolvimento, use `http://127.0.0.1:5173` ou `http://localhost:5173`.
@@ -75,7 +76,7 @@ Configurar SMTP ou enviar o link não bloqueia automaticamente contas não confi
    - **Recomendado:** configure a conexão do Supabase para o backend e, na pasta `backend`, rode
      `python -m alembic upgrade head`.
    - **SQL Editor do Supabase:** cole e execute
-     [`supabase_20261104_0012.sql`](../backend/migracoes/supabase_20261104_0012.sql).
+     o arquivo `backend/migracoes/supabase_20261104_0012.sql` do repositório de origem.
      Ele preserva as contas e pedidos e ativa RLS sem políticas públicas para a tabela de tokens.
      Se `alembic_version` existir, primeiro confira que a revisão atual é `20261029_0011`;
      após executar o SQL, rode `python -m alembic stamp 20261104_0012` com a mesma conexão

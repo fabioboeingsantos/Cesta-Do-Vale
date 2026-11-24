@@ -1,12 +1,13 @@
 # Fluxos do sistema — Cesta do Vale
 
+Descrição do checkout de referência de 24/11/2026. Consulte o [roadmap](../../ROADMAP_ARQUITETURA.md) para ver as conexões entre as camadas.
+
 ## 1. Fluxo de acesso
 
-1. A pessoa abre a tela de login.
-2. Informa usuário e senha.
-3. O backend autentica e identifica o perfil.
-4. A assinante é direcionada ao pedido/histórico; o produtor é direcionado à separação.
-5. Rotas protegidas validam a sessão e as permissões antes de responder.
+1. A pessoa abre a tela de acesso da landing. O cadastro público cria uma conta de assinante, com confirmação opcional de e-mail.
+2. No login informa usuário ou e-mail e senha. Quem esqueceu a senha pode pedir um link de recuperação de uso único.
+3. A API autentica e identifica o perfil. A assinante pode criar e acompanhar cestas. O produtor tem acesso à separação e ao catálogo conforme as permissões.
+4. As rotas protegidas validam a sessão, o perfil e, quando aplicável, a propriedade do registro.
 
 ## 2. Fluxo da assinante — criar pedido
 
@@ -24,7 +25,7 @@
 2. Seleciona uma cesta.
 3. Consulta produtos, quantidades e situação.
 4. Se estiver pendente, pode cancelar.
-5. Após a separação, pode confirmar o recebimento.
+5. Após o envio, recebe um aviso e pode confirmar o recebimento. A avaliação é liberada após a entrega.
 
 ## 4. Fluxo do produtor — separar pedido
 
@@ -32,9 +33,9 @@
 2. Consulta as cestas pendentes.
 3. Abre uma cesta.
 4. Registra os produtos separados, individualmente ou em lote.
-5. Pode desfazer a última ação quando necessário.
-6. Ao concluir todos os itens, finaliza a separação.
-7. O status da cesta é atualizado para a próxima etapa do fluxo.
+5. Pode ajustar ou desfazer quantidades registradas.
+6. Ao concluir a separação ou encerrá-la com faltantes, a cesta fica **Preparado para envio**.
+7. Ao marcar a cesta como enviada, a API registra o envio e persiste a notificação para a assinante.
 
 ## 5. Fluxo de autorização
 
@@ -53,3 +54,4 @@ flowchart LR
 - [`DIAGRAMA_GRUPOS.html`](DIAGRAMA_GRUPOS.html)
 - [`../PASSO_A_PASSO_PROJETO.md`](../PASSO_A_PASSO_PROJETO.md)
 - Telas em `frontend/src/componentes/`.
+- [Flora, consultas e confirmação](../../FLORA_FLUXO_POSSIBILIDADES_E_TESTES.md).

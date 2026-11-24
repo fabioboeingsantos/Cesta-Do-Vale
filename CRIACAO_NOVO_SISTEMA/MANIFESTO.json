@@ -1,354 +1,423 @@
 {
-  "data": "2026-11-16",
+  "data": "2026-11-24",
   "projeto_origem": "Cesta do Vale",
-  "tipo": "copia documental sem sincronizacao automatica",
+  "commit_base": "66a56f1248371e990f9b4d92c9ee55f2daf8ca96",
+  "tipo": "referência documental sem sincronização automática",
+  "criterio": "As entradas fiéis preservam o texto da origem. As adaptadas incorporam correções para o pacote, descritas em REVISAO_DOCUMENTAL.md. O SHA-256 usa UTF-8 com quebras de linha LF, sem alterar os demais caracteres. O modelo de ambiente ignorado pelo Git fica fora do inventário portátil.",
   "arquivos": [
     {
       "origem": ".dockerignore",
       "copia": "02_REFERENCIAS/.dockerignore",
-      "sha256": "717dd70d1df745ec6049f4bc6d077592c8ef7430c04143918d0d378404d0237d"
-    },
-    {
-      "origem": ".env.exemplo",
-      "copia": "02_REFERENCIAS/.env.exemplo",
-      "sha256": "c7f2b8ec2cfa0ccc75cc225b90eb4959d198983ba63f783b4d20681c105eb548"
+      "sha256": "ddb164a28943ed325fa1f490b714a9bee933310921c6d5dd464908d6887d676d",
+      "modo": "fiel"
     },
     {
       "origem": ".github/workflows/ci.yml",
       "copia": "02_REFERENCIAS/.github/workflows/ci.yml",
-      "sha256": "d47624d33a81ae50029f70e0b031abcf09a84577fca900e384a91f308bcb2a5d"
+      "sha256": "ac74f3b9e5455ba95fe493631e6be2c395667c34febd5575de7c2068183f3b42",
+      "modo": "fiel"
     },
     {
       "origem": ".gitignore",
       "copia": "02_REFERENCIAS/.gitignore",
-      "sha256": "0167aca82e736cf87a52dda055fc0bfd8fa7c5e22e17c590289479717793b287"
+      "sha256": "616522d01a27c3c34ca25d43a8374adcd7be6b2b2b37cffbe4c0aa3d2d024c2f",
+      "modo": "fiel"
     },
     {
       "origem": "ACESSO_LOCAL.md",
       "copia": "02_REFERENCIAS/ACESSO_LOCAL.md",
-      "sha256": "c816a9ebcdff128f6a15ed0468d60128e9812f58cc09aa894d924b3548a64dff"
+      "sha256": "615e4ad0ecedb2979fe1f6d1ab098f884d8f812446ac4a8ecccb5ceb6080a4fd",
+      "modo": "fiel"
     },
     {
       "origem": "backend/.dockerignore",
       "copia": "02_REFERENCIAS/backend/.dockerignore",
-      "sha256": "cae4c21247ecd14c92ca9dfe43fe4a108331c8460481e5e55d3138b5e0d6b42a"
+      "sha256": "7605b7fc16496f13f264a0c7f1a1692887ea13504382ebdf6dfc75d035770efb",
+      "modo": "fiel"
     },
     {
       "origem": "backend/alembic.ini",
       "copia": "02_REFERENCIAS/backend/alembic.ini",
-      "sha256": "64acb3d59d307bb3461fd9fb62de3a8bc7222768c3266605b115186e7f304eae"
+      "sha256": "64acb3d59d307bb3461fd9fb62de3a8bc7222768c3266605b115186e7f304eae",
+      "modo": "fiel"
     },
     {
       "origem": "backend/CASOS_DE_TESTE.md",
       "copia": "02_REFERENCIAS/backend/CASOS_DE_TESTE.md",
-      "sha256": "2b3da478ed571cbe54177773859373423e8d7b8d86db99b0f2bdd989c5231e0a"
+      "sha256": "cb36984826b6b2bd715c6e525df85cd5066d162e3123412cf560b79a2ebf4d33",
+      "modo": "fiel"
     },
     {
       "origem": "backend/Dockerfile",
       "copia": "02_REFERENCIAS/backend/Dockerfile",
-      "sha256": "b77470073ce59bbda52cbf1ffbc043eda66d247a99a1f6a93bf5a9c94ae2cb0c"
+      "sha256": "1c75a7d660f7fe813b37723f462edde6f5ea45f385129401adc3493404b385fc",
+      "modo": "fiel"
     },
     {
       "origem": "backend/ia/prompts/assinante.md",
       "copia": "02_REFERENCIAS/backend/ia/prompts/assinante.md",
-      "sha256": "3f0e0e9a25d4ab4b589615cbbbf2431fdbbe197cacaf5feae8a40e7d9e8ac125"
+      "sha256": "b05ca7bd6619ffe9faf3cf82b4ad118b03abce33d3ec7544f839e23060fea194",
+      "modo": "fiel"
     },
     {
       "origem": "backend/ia/prompts/base.md",
       "copia": "02_REFERENCIAS/backend/ia/prompts/base.md",
-      "sha256": "44bed124f8cae76cfb6f9f0ecc6f1f0712372153f16c66da00c38d9875d6389e"
+      "sha256": "5f6ef04aa8d5f2d943b3020c8b219d12a0e0ad4ab1d74067b00fbaa6d3c93fd5",
+      "modo": "fiel"
     },
     {
       "origem": "backend/ia/prompts/interprete.md",
       "copia": "02_REFERENCIAS/backend/ia/prompts/interprete.md",
-      "sha256": "cd7312c0d2aedeb07121c5526bb9e0b78e9e82a6921da24f496c6affa90c3223"
+      "sha256": "fdd148ef11d43bfda4bfedb752e75414e0c73d03999b5cd9320e857b8bc34639",
+      "modo": "fiel"
     },
     {
       "origem": "backend/ia/prompts/produtor.md",
       "copia": "02_REFERENCIAS/backend/ia/prompts/produtor.md",
-      "sha256": "9b36ff843298d98d95c7d41fa5fee86f2a41c4f5a2a2d373ec3ce7803066ffc0"
+      "sha256": "e360a41c549973f31a62cc8e196231c5ed552e03947a73aacd7c58b473011d50",
+      "modo": "fiel"
     },
     {
       "origem": "backend/ia/prompts/qa.md",
       "copia": "02_REFERENCIAS/backend/ia/prompts/qa.md",
-      "sha256": "eed1918787a904f77db94458b7cdaef436f1fadec1e442193a4d46373e17ca83"
+      "sha256": "7195e01d7a537803e5f14e66217054cdfdf243fdb5eb478d320cc7844ffdb0bf",
+      "modo": "fiel"
     },
     {
       "origem": "backend/requirements.txt",
       "copia": "02_REFERENCIAS/backend/requirements.txt",
-      "sha256": "f1c95e6cab735d366f632e9309396c10a74412afacefa9938acdcadddff61bae"
+      "sha256": "f1c95e6cab735d366f632e9309396c10a74412afacefa9938acdcadddff61bae",
+      "modo": "fiel"
     },
     {
       "origem": "backend/requirements-dev.txt",
       "copia": "02_REFERENCIAS/backend/requirements-dev.txt",
-      "sha256": "6a54636b7069494822de5a5af4956db727e0aa833ca597188f8209975258c46a"
+      "sha256": "3b1e0187a0bd555cb8b0e62dd9822ecd194beaf0d86d3210d6ac7cb98a977e0f",
+      "modo": "fiel"
     },
     {
       "origem": "Caddyfile",
       "copia": "02_REFERENCIAS/Caddyfile",
-      "sha256": "0cadc8a14af699a0dc747a1b932c0808a9d49f3055409f4e70013c9e9bccc627"
+      "sha256": "6abe12a4bd5775a5f8e11036983db823b0cb6709e0bf884b435feced50260e27",
+      "modo": "fiel"
     },
     {
       "origem": "docker-compose.yml",
       "copia": "02_REFERENCIAS/docker-compose.yml",
-      "sha256": "3ef85d89b2602ed25647a794856fd347bee3ac653d89190ebb02806175040eb9"
+      "sha256": "3d74d3cfab59bef83abd0584a92918ca51a366a8504e67446dd0289375cd23a4",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ANALISE_SISTEMA.md",
       "copia": "02_REFERENCIAS/docs/ANALISE_SISTEMA.md",
-      "sha256": "c48461678121f2a5f7f798ebad5392b63ddc3db4ddc1e6d5c4d505144e33e1a0"
+      "sha256": "fe379e95908fb5978fcf4ad019957aed867aaea0f221fae983b58bf43cfbd484",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ASSISTENTE_OPENROUTER.md",
       "copia": "02_REFERENCIAS/docs/ASSISTENTE_OPENROUTER.md",
-      "sha256": "af3ded2fe97004c1fd07351814b14f404b1a5e11304916b9f9955a088c63e04d"
+      "sha256": "040bcb09fac5b2b800d007483df219293ef9a283d29a1d8b83c9d074711d4b41",
+      "modo": "fiel"
     },
     {
       "origem": "docs/AUTENTICACAO_EMAIL.md",
       "copia": "02_REFERENCIAS/docs/AUTENTICACAO_EMAIL.md",
-      "sha256": "1ee0e245444f285d96ba1e533c77101454e536b37b9b54a3b9d47300d154c354"
+      "sha256": "d98ab9d38c27177f547e4411b5073bd757ae6a321d2eb38d48f7e632b7b7b943",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/banco-de-dados.md",
       "copia": "02_REFERENCIAS/docs/banco-de-dados.md",
-      "sha256": "c9a1fdb659100f907b45f1171031438f30ae066ef4c68b20ecd058f874489698"
+      "sha256": "d47777bbee89254c9a1a25ad62b152d204808c865664341064731685b9e04e9c",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/BRIEFING.md",
       "copia": "02_REFERENCIAS/docs/BRIEFING.md",
-      "sha256": "686e9761e749f15057fb8daf6e08c57e0f1e68aa41d6fbf65c61e76eae7d24a2"
+      "sha256": "686e9761e749f15057fb8daf6e08c57e0f1e68aa41d6fbf65c61e76eae7d24a2",
+      "modo": "fiel"
     },
     {
       "origem": "docs/BRIEFING_IA.md",
       "copia": "02_REFERENCIAS/docs/BRIEFING_IA.md",
-      "sha256": "db8390df0c624ff4c06fd3347c7f0a0ad91afaec45b864c7b6e9b620a5425fba"
+      "sha256": "df21a81fcea2673591ca7b06c6f3644e6b3fb810b5f13c7a549a737fdd1ba797",
+      "modo": "fiel"
     },
     {
       "origem": "docs/CARTILHA.md",
       "copia": "02_REFERENCIAS/docs/CARTILHA.md",
-      "sha256": "682c52ad73af4e267550201a625f15e909b88021a8999ac01682fc204b9a20e1"
+      "sha256": "682c52ad73af4e267550201a625f15e909b88021a8999ac01682fc204b9a20e1",
+      "modo": "fiel"
     },
     {
       "origem": "docs/DIAGRAMA_GRUPOS.html",
       "copia": "02_REFERENCIAS/docs/DIAGRAMA_GRUPOS.html",
-      "sha256": "1a1052e773daf5a881745598c2eedb1ab2715c27a5eb400f8b87980bd613b862"
+      "sha256": "1a1052e773daf5a881745598c2eedb1ab2715c27a5eb400f8b87980bd613b862",
+      "modo": "fiel"
     },
     {
       "origem": "docs/FLUXOS.md",
       "copia": "02_REFERENCIAS/docs/FLUXOS.md",
-      "sha256": "d45d7f5fc13f4b81c7ba7b2c6fda06fc8d3627417ac517f32cb290a9cf8ba9c3"
+      "sha256": "11f87a0e5f189d183905b405c37dd6e8d306b62ae24f6b90b02eb1e86e79dc42",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia.md",
       "copia": "02_REFERENCIAS/docs/ia.md",
-      "sha256": "49e1e00ff8710d527643530a0b9a43832784d968ced43b70df245fa7a1b1d943"
+      "sha256": "e70399f2b593a38621f9768c6eaadac5e7ed77254495a418c07df27a3657ee48",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia/arquitetura.md",
       "copia": "02_REFERENCIAS/docs/ia/arquitetura.md",
-      "sha256": "2dec201a77019b1558ef73980ad235ee6bfc7bbd3328f41fdfa5e36ee4274781"
+      "sha256": "959eaa6c8e8c9f9b4b1af2cf4d44b31bf82bff56d77ea0cbb2a8b2f2f3b92044",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia/cenarios.md",
       "copia": "02_REFERENCIAS/docs/ia/cenarios.md",
-      "sha256": "f4e5e274fd13f7987dea2645bb9fbe7061ceb3f96cb0134a68aff6635caad1b7"
+      "sha256": "c3fde192bd7b9d327b73f04b127b41ce5c0a67c10a871c15d363f363a9610c4b",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/configuracao.md",
       "copia": "02_REFERENCIAS/docs/ia/configuracao.md",
-      "sha256": "365ad9f9fede45e236ffe0d8e25ce569e902b204542b21c27e8f7a0ae77c6f47"
+      "sha256": "ffd1f96e8dc9016156dd39289b06328015e51207e711fde330922ebb9b1dac07",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia/CONVERSA_E_CATALOGO.md",
       "copia": "02_REFERENCIAS/docs/ia/CONVERSA_E_CATALOGO.md",
-      "sha256": "765a047e697c42e470235afc15f78b498112e3511b5da5f7c4f8e26fef8bf521"
+      "sha256": "1b341494d98b59c79a66e25bf13b66616300689510472f3affc99aac44cf8444",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/ESCRITORIO_FLORA.html",
       "copia": "02_REFERENCIAS/docs/ia/ESCRITORIO_FLORA.html",
-      "sha256": "cfd9c95893be88d28e053dfe4693688786cef14fb6cca03e449e0aa60d3c53cb"
+      "sha256": "b48e6d84b9e1f715b8a3f8e87d7b91180871f5ab2d04cd96f8a34f34a9e33abf",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/FLUXO_AGENTES.html",
       "copia": "02_REFERENCIAS/docs/ia/FLUXO_AGENTES.html",
-      "sha256": "95b0894b0c33133f27a1c7cbd4b99660c99c5359ecbd7dbe1f5703c2ce6d501e"
+      "sha256": "62e1e4f78bfad205349a1c4ba1288ce3bc2cb1d5b3e15885cbc17ead95ecfd95",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/fluxo-assistente.mmd",
       "copia": "02_REFERENCIAS/docs/ia/fluxo-assistente.mmd",
-      "sha256": "a243d78b9fb173641dcedf769f28361980f3f80ec43535de3ce2629fef229a17"
+      "sha256": "9c17969302624b0e44091167429828fadac1d2fc46b304b7dbd61054213a9ea3",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/fluxo-assistente.svg",
       "copia": "02_REFERENCIAS/docs/ia/fluxo-assistente.svg",
-      "sha256": "6f2645b2712c77c148f88de7d7b726c479603bb10369cf5b30d1fbfae4463512"
+      "sha256": "5349168be6b838cb1a8ffd0d9a3af9d5a31a67a5bddc514d199b530d13f78c59",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/INTERATIVIDADE_FLORA.md",
       "copia": "02_REFERENCIAS/docs/ia/INTERATIVIDADE_FLORA.md",
-      "sha256": "dc153700d057f1e29c4f94cefd2df735552ed95097a5cdeb97d39d6ad24cee6f"
+      "sha256": "4d481b54a9c5a6785e70bf2dd2961f5ea423185685d6718b0fa740f7ee0dc103",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia/PROMPT_FLORA.md",
       "copia": "02_REFERENCIAS/docs/ia/PROMPT_FLORA.md",
-      "sha256": "55bd7e956dc2b5b926bc0d52fc8cb9ea40dcf46dface0863e552b7eb8508bef4"
+      "sha256": "d2ea5b1bee5c1eb550152587eb056f4617ceb4820f3400ef52da026f48363661",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/RELATORIO_TESTES_2026-11-07.md",
       "copia": "02_REFERENCIAS/docs/ia/RELATORIO_TESTES_2026-11-07.md",
-      "sha256": "2296d7a4f7bc88705e4cb83f56a41404d09dd156fe274ca0ac2d741d198534c5"
+      "sha256": "c76277bc62134c3f22e1487eef845954e827b979189a3c4cde140f8aa6799fe8",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/VOZ_FLORA.md",
       "copia": "02_REFERENCIAS/docs/ia/VOZ_FLORA.md",
-      "sha256": "d932d7c5112444b5f96240ba658d3abba5a6b145d2028de9f7107e1525b34e7f"
+      "sha256": "243c02f35299bb9b1524e7b3dfa810087e3f9398175c83cdeca52b83f7cf0905",
+      "modo": "fiel"
     },
     {
       "origem": "docs/PRD.md",
       "copia": "02_REFERENCIAS/docs/PRD.md",
-      "sha256": "0a925f4fc0ac43a899f9fb8a893407ffcae6829c5180a11d8b3b4098bdb396dc"
+      "sha256": "07b4ab0a34f8a4e3c1fd7d9b81371343c5a4dbb032b5f65722c05def5374cfeb",
+      "modo": "fiel"
     },
     {
       "origem": "docs/styleguide/COMPONENTES.md",
       "copia": "02_REFERENCIAS/docs/styleguide/COMPONENTES.md",
-      "sha256": "877627b677e19f7987620d204934745c156ffd8c035e349ac8657fb7a8922c54"
+      "sha256": "0e0526353638bf77466c6ff23bfb36243a34015228d4e1687a945e29d1cbd60e",
+      "modo": "fiel"
     },
     {
       "origem": "docs/styleguide/CORES.md",
       "copia": "02_REFERENCIAS/docs/styleguide/CORES.md",
-      "sha256": "9386b0764402c8023b891aeb8585232f67c59ed209e6231fd16330316baae58d"
+      "sha256": "9a82e2f9458e1b472136c04a08d93f70da45ecb70cbb1bf1f83a68464e57db27",
+      "modo": "fiel"
     },
     {
       "origem": "docs/styleguide/TIPOGRAFIA.md",
       "copia": "02_REFERENCIAS/docs/styleguide/TIPOGRAFIA.md",
-      "sha256": "79474609eb0281ed4a3ad48fcfe97665de05d083a718ca90ed3c023d104ec53c"
+      "sha256": "79474609eb0281ed4a3ad48fcfe97665de05d083a718ca90ed3c023d104ec53c",
+      "modo": "fiel"
     },
     {
       "origem": "docs/TDR.md",
       "copia": "02_REFERENCIAS/docs/TDR.md",
-      "sha256": "10281964f8ed990d35c70c99657fb5dc63da2c3e9dfd1d284dbc345b54851ec4"
+      "sha256": "afc31bbf65ef2b95a9e94ecf8909fc7f143561b278cb152ef6aaa2bec3da4776",
+      "modo": "fiel"
     },
     {
       "origem": "docs/TESTES_ASSISTENTE_OPENROUTER.md",
       "copia": "02_REFERENCIAS/docs/TESTES_ASSISTENTE_OPENROUTER.md",
-      "sha256": "e7f70a7a2a0bef3098dc6043e97fbd20f9abde75de7023470044966fc2698b12"
+      "sha256": "e7f70a7a2a0bef3098dc6043e97fbd20f9abde75de7023470044966fc2698b12",
+      "modo": "fiel"
     },
     {
       "origem": "docs/VALIDACAO_LOCAL.md",
       "copia": "02_REFERENCIAS/docs/VALIDACAO_LOCAL.md",
-      "sha256": "084c933a7fbbea769c3d93a4d9988d957cb2508a00b2833983fd75af0b71ad3f"
+      "sha256": "356cbc031be250d6d01c8a407cb850b05c0a9519f7c159c7bb4da8d3c6e73098",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/.dockerignore",
       "copia": "02_REFERENCIAS/frontend/.dockerignore",
-      "sha256": "cdde29c09d88cb374c9cdd67948630a4489432dd9474a1cb4400e06e1bf4417c"
+      "sha256": "2bf1d0a30c3110766c1a9f3a120fb772c90fbb74fbc30ea55fe22c49f1a3c9c9",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/Dockerfile",
       "copia": "02_REFERENCIAS/frontend/Dockerfile",
-      "sha256": "2406e945001924ca1683063e8b7472bb3c19dd9fcd46b5b79200780e7f890dd9"
+      "sha256": "d4726acc2ce6505a1e6dfbfff67ec87cf20234b732717585fd3297aaf6be237b",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/package.json",
       "copia": "02_REFERENCIAS/frontend/package.json",
-      "sha256": "64a8243ce3095e966a5dfb0deaa51a51940f55d44fcf7e229ea85edc64856db3"
+      "sha256": "e57b386ff572fba50aef83553cf1535bac3d63cbdd3cd2978d785e2c2d76d19e",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/package-lock.json",
       "copia": "02_REFERENCIAS/frontend/package-lock.json",
-      "sha256": "84e9150c130a8eb19ac9999201dbbbe00761e4128aec742e4af6b20dafe1f3af"
+      "sha256": "700ccc6d0c32dfe96ea2188fc8a324d0713b716fae4481164a52577da4dfd40a",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/README.md",
       "copia": "02_REFERENCIAS/frontend/README.md",
-      "sha256": "6eac8498250732efd3d6f11f9203c053efd611ab713c78c7f6408cd2980cace9"
+      "sha256": "ea50601f197176aa413842d299c97450087b428542725e9836868f9a89334519",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/vercel.json",
       "copia": "02_REFERENCIAS/frontend/vercel.json",
-      "sha256": "637d34282dcff057072aac341910bd90468ad53b693c9e1551bd722a47dcaac4"
+      "sha256": "637d34282dcff057072aac341910bd90468ad53b693c9e1551bd722a47dcaac4",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/vite.config.js",
       "copia": "02_REFERENCIAS/frontend/vite.config.js",
-      "sha256": "42d15758a91bb37ce031eb1155ce6a5c0a5a9f39b3b6a975937c9635028624ca"
+      "sha256": "861412f78ee7d9cf899c6114ad4a58569f4e6f147bafb3b8cb899999585ed6df",
+      "modo": "fiel"
     },
     {
       "origem": "PASSO_A_PASSO_PROJETO.md",
       "copia": "02_REFERENCIAS/PASSO_A_PASSO_PROJETO.md",
-      "sha256": "6e370783f540c23d6634d2377a818e2d5bcbc9ca4435d82d9580167d89f64306"
+      "sha256": "5f6972e5bdeaf4631d1174d5dbc6e9c8c06e2db25135fbd693eaaed012535648",
+      "modo": "fiel"
     },
     {
       "origem": "PENDENCIAS.md",
       "copia": "02_REFERENCIAS/PENDENCIAS.md",
-      "sha256": "a22532babdde9a61b137887b6c0759ec59e7f68c9b9f254ecc83ea502e7085f0"
+      "sha256": "a33864f29d7494e0a7313bfcfbab5cc92aba10356087f93468d5771185e57cec",
+      "modo": "adaptada"
     },
     {
       "origem": "README.md",
       "copia": "02_REFERENCIAS/README.md",
-      "sha256": "8414b3f8b69e4688d1a387559701f3099b12b9f15647e6513e735c9cc732702c"
+      "sha256": "ce8bf93295b497a577446ca8cc4d2b0b566ce5f33c5c190469a8ad94953fb844",
+      "modo": "adaptada"
     },
     {
       "origem": ".docs/roadmap.md",
       "copia": "02_REFERENCIAS/.docs/roadmap.md",
-      "sha256": "561a458bfded41bcb1c4cb23489528f1ac0e31657f2b6280f4bce921d26ec803"
+      "sha256": "561a458bfded41bcb1c4cb23489528f1ac0e31657f2b6280f4bce921d26ec803",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/README.md",
       "copia": "02_REFERENCIAS/.docs/README.md",
-      "sha256": "5471bc7c82bf0de9e8bdb1862d643342fa5924e5c473dfc1d600a12e4f5fb825"
+      "sha256": "e8f00f832888c852d24bdc5d60275c6053f7a752b479cec28804df47a080a8ee",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/proximos-passos.md",
       "copia": "02_REFERENCIAS/.docs/proximos-passos.md",
-      "sha256": "b223635fc9818d61b6056a0dc54286696a9c981d760eaf6a14c0a614122bff78"
+      "sha256": "1789e67680663cca1a911afc6bd59be505f964571e234c3246c7e69e117c0a84",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/infra.md",
       "copia": "02_REFERENCIAS/.docs/infra.md",
-      "sha256": "694d302cd7ef72e2a6241d2f8789d33d4e14c2030b947aaf48310bbacaede998"
+      "sha256": "7f653753cbc02799bcb51d9592238bbf46c0f757117baeef3ac6c91fcd370878",
+      "modo": "adaptada"
     },
     {
       "origem": ".docs/infra.html",
       "copia": "02_REFERENCIAS/.docs/infra.html",
-      "sha256": "8dc1582c1caf0d13b2f47515bba2a2057e0821325f0803705b0a976babe9bece"
+      "sha256": "f35a7211f97804fc9ec66dc2db44d0144bbd8092cf567369226052a351328101",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/ia.md",
       "copia": "02_REFERENCIAS/.docs/ia.md",
-      "sha256": "b073e6c4a3190993b35ead18701ed8544f3f246f9d9d581c1ebfae23a3052a48"
+      "sha256": "9efd27f17c4dfd19a75055deabf0d781aadfd0ee99f699718f33d7cd0868e374",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/decisoes.md",
       "copia": "02_REFERENCIAS/.docs/decisoes.md",
-      "sha256": "e10506342ec0b878021787d2604ff60a9cd43c895bd8e66f13a30067c3c9ad13"
+      "sha256": "eeae02ad314ab065fd10d0a0f87557931098c6ba9864ab57ae64d5762a354c9b",
+      "modo": "fiel"
     },
     {
       "origem": ".docs/arquitetura.md",
       "copia": "02_REFERENCIAS/.docs/arquitetura.md",
-      "sha256": "fb6f38a3ab3ceb049e943f9da55254f46cc8ceeb8451ab2c20fd74b2c1cac96d"
+      "sha256": "96792af453ddf4656c83681d84bc9cd4453990de4ae383db85ea96954d5c37b1",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/FALLBACK_JANGADA.md",
       "copia": "02_REFERENCIAS/docs/ia/FALLBACK_JANGADA.md",
-      "sha256": "1524ca5b775ad4330b77d76e476591a2964e0bc609f88a62e81719ccf8dcfe00"
+      "sha256": "9ca20ce4ceb6e66dcd4fd4b095c4f0fe7953b593736aedc2fdafbdc121d63310",
+      "modo": "adaptada"
     },
     {
       "origem": "docs/ia/fallback.ia.md",
       "copia": "02_REFERENCIAS/docs/ia/fallback.ia.md",
-      "sha256": "a3b1862fd232c9678b05c01cbe3c8c77adcbcfa53358bf6d30a38f8b56712f2f"
+      "sha256": "a3b1862fd232c9678b05c01cbe3c8c77adcbcfa53358bf6d30a38f8b56712f2f",
+      "modo": "fiel"
     },
     {
       "origem": "docs/ia/TESTE_UX_FLORA.md",
       "copia": "02_REFERENCIAS/docs/ia/TESTE_UX_FLORA.md",
-      "sha256": "db7ad7f129ae867f957c4e85914551902e4c5ffe23d762332888422ba21c08cf"
+      "sha256": "b496b7c1e772718de75e695db50b20f7dbbdfc559ce3e7d82e30435d389df9ff",
+      "modo": "fiel"
     },
     {
       "origem": "frontend/playwright.config.js",
       "copia": "02_REFERENCIAS/frontend/playwright.config.js",
-      "sha256": "051d50070dab732cee4aaa49f4843f524b131ab72b40ef5d7f6e0502f85ee6c9"
+      "sha256": "d9f0871da4dba34ead16c11a149fcf2dddec75243a7676d4e912a8bb13c242de",
+      "modo": "fiel"
+    },
+    {
+      "origem": "docs/PRIVACIDADE_OPERACIONAL.md",
+      "copia": "02_REFERENCIAS/docs/PRIVACIDADE_OPERACIONAL.md",
+      "modo": "fiel",
+      "sha256": "5784b815fec573ae7a89f7f6783d80554d612b208b315e3418cc8b978be2d81b"
     }
-  ],
-  "commit_base": "22d3fbd0bd1a5c99d9699536a27569bdde93e49f",
-  "criterio": "Referências sincronizadas com os arquivos locais em 16/11/2026. Consultar ESTADO_ATUAL.md para diferenças entre commit e alterações locais. Exemplo de ambiente preservado sem leitura ou sincronização."
+  ]
 }

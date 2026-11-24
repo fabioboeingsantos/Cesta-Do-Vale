@@ -1,5 +1,11 @@
 # Cesta do Vale
 
+Cópia de referência com correções documentais de 24/11/2026. Para construir outro site, use o [roadmap](../ROADMAP_ARQUITETURA.md) e o [passo a passo](../PASSO_A_PASSO_PROJETO.md).
+
+Nome oficial do projeto e do repositório GitHub: **Cesta Do Vale**. O nome da pasta
+local pode continuar diferente; em outros computadores, clone o repositório pelo novo
+endereço `https://github.com/fabioboeingsantos/Cesta-Do-Vale` após a renomeação no GitHub.
+
 Sistema web para pedidos semanais de cestas de uma horta comunitária. A assinante consulta o catálogo,
 monta e acompanha o pedido; o produtor gerencia produtos e estoque, separa os itens e conclui a entrega.
 
@@ -15,14 +21,14 @@ para evidências, limitações e pontos que ainda precisam de validação.
 - Docker: Docker Engine e Compose disponíveis; não exige Python ou Node instalados no host.
 - `uv` é opcional para instalar Python e dependências. A CI usa Python 3.12 e Node 22;
   o Dockerfile do backend usa Python 3.13.
-- O backend lê **`.env` na raiz**, além das variáveis do processo. `backend/.env` e arquivos
-  `.env.local` não são carregados automaticamente pelo backend.
+- O backend preserva as variáveis do processo, carrega o **`.env` da raiz** e usa
+  `backend/.env` para valores ainda ausentes. Arquivos `.env.local` são tratados pelo frontend.
 - O frontend lê seus próprios arquivos de ambiente dentro de `frontend/`. Variáveis do processo
   têm precedência; arquivos `.env.local` podem substituir os valores versionados. Reinicie o Vite
   após alterações; a URL de produção é incorporada durante o build.
 
-Escolha um dos fluxos abaixo antes de configurar o banco. `SUPABASE_DB_URL` ou `DATABASE_URL`
-têm precedência sobre `BANCO_DRIVER` e as outras variáveis `BANCO_*`.
+Escolha um dos fluxos abaixo antes de configurar o banco. `BANCO_DRIVER=sqlite` explícito mantém
+o SQLite. Nos demais casos a API tenta primeiro `SUPABASE_DB_URL` e depois `DATABASE_URL`, quando preenchidas.
 
 ## Catálogo e Flora do Vale
 
@@ -34,8 +40,10 @@ A **Flora** pode consultar o catálogo, recomendar ou preparar uma cesta para re
 e ajudar o produtor a consultar pedidos e separações. A conversa fica em memória enquanto a janela
 permanece aberta. Ela aceita digitação e, quando disponível no navegador, fala para texto e reprodução
 falada das respostas. O modo padrão `simulado` não chama um serviço externo; para usar OpenRouter, configure
-o backend conforme [configuração da IA](docs/ia/configuracao.md). Uma análise encaminhada ao OpenRouter
-usa três chamadas sequenciais e aceita somente modelos gratuitos compatíveis. Consulte [arquitetura e fluxo](docs/ia/arquitetura.md),
+o backend conforme [configuração da IA](docs/ia/configuracao.md). A análise externa pode passar por
+intérprete, especialista e QA. OpenRouter usa modelos gratuitos compatíveis e pode recorrer ao Gemini
+pela Jangada em falhas elegíveis. A opção Montar cesta usa a rota própria `/assistente/pedido`.
+Consulte [arquitetura e fluxo](../FLORA_FLUXO_POSSIBILIDADES_E_TESTES.md),
 [comportamento do catálogo](docs/ia/CONVERSA_E_CATALOGO.md) e [cenários de teste](docs/ia/cenarios.md).
 
 Consultas reconhecidas pelo backend podem ser respondidas localmente, sem chamar o OpenRouter.
@@ -411,9 +419,9 @@ npm run lint
 npm run build
 ```
 
-O workflow [CI](.github/workflows/ci.yml) executa testes do backend, lint e build do frontend
-em pushes e pull requests para `master`. Não há teste E2E de navegador no workflow nem validação
-automática dos serviços reais Google, OpenRouter, SMTP, MySQL ou Supabase.
+O workflow [CI](.github/workflows/ci.yml) configura pytest, lint, testes unitários, Playwright em desktop e
+celular e build em pushes e pull requests para `master`. Os testes de navegador simulam a API. A validação
+com Google, OpenRouter, Gemini, SMTP, MySQL ou Supabase reais depende de um ambiente próprio.
 
 Na revisão de 10/11/2026, lint e build do frontend passaram. A suíte Python não pôde iniciar:
 `backend/.venv` aponta para uma instalação Python 3.12 ausente. O Python alternativo disponível
@@ -451,7 +459,7 @@ Endereços de referência da publicação (disponibilidade não verificada nesta
 - `docs/`: cartilha, briefing, marca e styleguide.
 - `frontend/`: aplicação React com o fluxo de pedido da assinante.
 - `backend/`: API organizada em rotas, serviços, repositórios e esquemas.
-- `skills/`: catálogo de skills internas da Flora. A [skill de montagem e ajuste de cesta](skills/montar-ajustar-cesta/SKILL.md) referencia as instruções operacionais incluídas no pacote do backend.
+- `skills/`: catálogo de skills internas da Flora no repositório de origem. O [guia da Flora](../FLORA_FLUXO_POSSIBILIDADES_E_TESTES.md) cobre montagem e ajuste.
 
 ## Limites atuais
 
@@ -473,4 +481,4 @@ Endereços de referência da publicação (disponibilidade não verificada nesta
 - `Apresentacao/BACKLOG_APRESENTACAO.md`: backlog separado entre concluído, validação e evolução.
 - `Apresentacao/personas/`: imagens e cenas usadas exclusivamente na apresentação.
 - `PENDENCIAS.md`: lista central de atividades para depois da entrega.
-- [PLANOS_FUTUROS.md](PLANOS_FUTUROS.md): proposta de avaliação do Jev para classificação de intenção e revisão semântica da Flora.
+- `PLANOS_FUTUROS.md`, no repositório de origem, registra a proposta de avaliação do Jev.

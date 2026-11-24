@@ -1,5 +1,7 @@
 # Infraestrutura
 
+Proposta histórica da origem. O [roadmap](../../ROADMAP_ARQUITETURA.md) descreve os ambientes e a topologia da revisão de 24/11/2026. Os caminhos abaixo identificam arquivos do repositório original.
+
 ## 1. Arquitetura de produção
 
 Observação para o Mermaid Live: cole somente o conteúdo a partir de `flowchart LR`, sem o bloco Markdown.
@@ -20,11 +22,11 @@ flowchart LR
 
 | Camada | Desenvolvimento (hoje no projeto) | Produção (proposta) |
 |---|---|---|
-| API | FastAPI local, executada com `fastapi dev main.py` na porta 8000; o backend usa SQLAlchemy e pode apontar para SQLite local ou MySQL local; veja [backend/main.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/main.py) e [backend/configuracao.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/configuracao.py). | API em máquina interna, sem exposição direta ao público, ouvindo na 8000 e acessível somente pelo servidor web. |
-| Tela | React/Vite em ambiente local na porta 5173; [frontend/.env.development](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.development) define a API local e [frontend/src/api.js](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/src/api.js) centraliza as chamadas. | Tela servida em HTTPS na 443; [frontend/.env.production](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.production) usa `/api` na mesma origem pública, encaminhado pelo servidor web para a API interna. |
-| Banco | SQLite local ou MySQL local conforme [backend/.env.exemplo](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/.env.exemplo); o exemplo usa `BANCO_HOST=localhost`. | MySQL interno, em rede privada, na 3306, acessível apenas pela API; sem acesso direto do navegador ou da internet. |
-| `.env` | Backend usa o arquivo local exemplificado em [backend/.env.exemplo](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/.env.exemplo); o frontend usa [frontend/.env.development](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.development) e [frontend/.env.production](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.production) para a URL da API. | Variáveis de ambiente injetadas fora do repositório. O frontend usa `/api` pela mesma origem; as variáveis do backend, inclusive `JWT_COOKIE_SECURE` e `FRONTEND_URL`, devem ser ajustadas ao ambiente real. |
-| CORS | O backend habilita CORS em [backend/main.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/main.py) e usa `FRONTEND_URL` em [backend/configuracao.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/configuracao.py), com padrão de `http://localhost:5173`. | ? Se a tela e a API ficarem na mesma origem pública, não há necessidade de CORS entre elas; a proposta mantém a mesma origem e usa o servidor web para encaminhar `/api`. |
+| API | FastAPI local, executada com `fastapi dev main.py` na porta 8000; o backend usa SQLAlchemy e pode apontar para SQLite local ou MySQL local; veja `backend/main.py` e `backend/configuracao.py`. | API em máquina interna, sem exposição direta ao público, ouvindo na 8000 e acessível somente pelo servidor web. |
+| Tela | React/Vite em ambiente local na porta 5173; `frontend/.env.development` define a API local e `frontend/src/api.js` centraliza as chamadas. | Tela servida em HTTPS na 443; `frontend/.env.production` usa `/api` na mesma origem pública, encaminhado pelo servidor web para a API interna. |
+| Banco | SQLite local ou MySQL local conforme `backend/.env.exemplo`; o exemplo usa `BANCO_HOST=localhost`. | MySQL interno, em rede privada, na 3306, acessível apenas pela API; sem acesso direto do navegador ou da internet. |
+| `.env` | Backend usa o arquivo local exemplificado em `backend/.env.exemplo`; o frontend usa `frontend/.env.development` e `frontend/.env.production` para a URL da API. | Variáveis de ambiente injetadas fora do repositório. O frontend usa `/api` pela mesma origem; as variáveis do backend, inclusive `JWT_COOKIE_SECURE` e `FRONTEND_URL`, devem ser ajustadas ao ambiente real. |
+| CORS | O backend habilita CORS em `backend/main.py` e usa `FRONTEND_URL` em `backend/configuracao.py`, com padrão de `http://localhost:5173`. | ? Se a tela e a API ficarem na mesma origem pública, não há necessidade de CORS entre elas; a proposta mantém a mesma origem e usa o servidor web para encaminhar `/api`. |
 
 ## 3. O caminho do login
 
@@ -47,43 +49,43 @@ flowchart LR
 9. Ao abrir ou recarregar a aplicação, o frontend chama `/usuarios/me` para restaurar a sessão.
    - Roda na máquina do usuário; a verificação final acontece na API e no banco.
 
-Observação: o código atual já usa cookie `HttpOnly` no backend em [backend/rotas/autenticacao.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/rotas/autenticacao.py) e `credentials: "include"` nas chamadas centralizadas em [frontend/src/api.js](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/src/api.js), o que combina com a arquitetura proposta.
+Observação: o código atual já usa cookie `HttpOnly` no backend em `backend/rotas/autenticacao.py` e `credentials: "include"` nas chamadas centralizadas em `frontend/src/api.js`, o que combina com a arquitetura proposta.
 
 ## 4. O que está chumbado
 
 Os pontos abaixo mostram onde o código ainda usa `localhost` ou `127.0.0.1`. Isso não é, por si só, “erro”, mas sinaliza que o projeto ainda está orientado ao ambiente de desenvolvimento.
 
-- [backend/configuracao.py](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/configuracao.py): linha 35
+- `backend/configuracao.py`: linha 35
   - Valor: `http://localhost:5173`
   - Uso: servidor; padrão de origem permitida para CORS em desenvolvimento.
   - Observação: é um valor de desenvolvimento; em produção, a origem pública real ou a mesma origem da tela deve substituir esse valor.
 
-- [backend/.env.exemplo](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/.env.exemplo): linha 5
+- `backend/.env.exemplo`: linha 5
   - Valor: `BANCO_HOST=localhost`
   - Uso: servidor; aponta o banco para a máquina local em desenvolvimento.
   - Observação: em produção, o MySQL teria um host interno específico, não `localhost`.
 
-- [backend/.env.exemplo](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/backend/.env.exemplo): linha 8
+- `backend/.env.exemplo`: linha 8
   - Valor: `FRONTEND_URL=http://localhost:5173`
   - Uso: servidor; origem autorizada para CORS em desenvolvimento.
   - Observação: é configuração local de dev; não representa a produção.
 
-- [frontend/.env.development](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.development): linha 1
+- `frontend/.env.development`: linha 1
   - Valor: `VITE_URL_DA_API=http://localhost:8000`
   - Uso: navegador; o Vite injeta a URL local da API no frontend durante o desenvolvimento.
-  - Observação: em produção, o frontend usa `/api` definido em [frontend/.env.production](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/frontend/.env.production), na mesma origem da tela.
+  - Observação: em produção, o frontend usa `/api` definido em `frontend/.env.production`, na mesma origem da tela.
 
-- [README.md](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/README.md): linha 73
+- `README.md`: linha 73
   - Valor: `http://127.0.0.1:8000/docs`
   - Uso: documentação do ambiente local de desenvolvimento.
   - Observação: é referência de execução local, não de produção.
 
-- [PASSO_A_PASSO_PROJETO.md](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/PASSO_A_PASSO_PROJETO.md): linha 325
+- `PASSO_A_PASSO_PROJETO.md`: linha 325
   - Valor: `http://127.0.0.1:8000/docs`
   - Uso: documentação local de desenvolvimento.
   - Observação: aponta o ambiente do dev, não a arquitetura final.
 
-- [PASSO_A_PASSO_PROJETO.md](C:/Users/fabio/Desktop/Avaliacao%20Front%20-%20Back/PASSO_A_PASSO_PROJETO.md): linha 424
+- `PASSO_A_PASSO_PROJETO.md`: linha 424
   - Valor: `http://localhost:5173`
   - Uso: navegador; endereço do Vite em desenvolvimento.
   - Observação: é uma origem local de dev; não deve ser usada como URL pública de produção.

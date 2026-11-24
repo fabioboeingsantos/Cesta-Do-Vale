@@ -1,5 +1,7 @@
 # Cesta do Vale
 
+Para construir outro site a partir deste **exemplo técnico**, consulte [Criação de um novo sistema](CRIACAO_NOVO_SISTEMA/00_COMECE_AQUI.md), com o roadmap de arquitetura e o guia de implementação.
+
 Nome oficial do projeto e do repositório GitHub: **Cesta Do Vale**. O nome da pasta
 local pode continuar diferente; em outros computadores, clone o repositório pelo novo
 endereço `https://github.com/fabioboeingsantos/Cesta-Do-Vale` após a renomeação no GitHub.

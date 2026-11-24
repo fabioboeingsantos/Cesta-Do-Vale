@@ -1,10 +1,17 @@
 # Checklist de criação
 
+Use as fases do [roadmap](../ROADMAP_ARQUITETURA.md#4-etapas-dependências-e-critérios-de-aceite) para acompanhar a entrega. Registre o motivo para uma fase que não se aplica ao projeto.
+
+| Fase | Responsável | Situação | Evidência com versão e data |
+| --- | --- | --- | --- |
+| [fase do roadmap] | [nome] | [pendente, em andamento, concluída ou não aplicável] | [resultado de teste, documento ou ambiente] |
+
 ## Definição
 
 - [ ] Preencher problema, personas, tarefas e matriz de permissões.
 - [ ] Confirmar se a mudança envolve apenas personas ou também o domínio.
 - [ ] Definir escopo, entidades, estados, regras e critérios de aceite.
+- [ ] Prototipar a jornada principal com mapa de telas, permissões e estados de falha.
 - [ ] Definir identidade visual e necessidade de assistente/voz/e-mail.
 
 ## Mapa de telas e protótipo
@@ -22,7 +29,7 @@
 - [ ] Definir banco novo, URLs, CORS e chaves próprias.
 - [ ] Substituir domínios, nomes de projetos, referências à marca e dados de demonstração.
 - [ ] Manter esta pasta fora de `public`, build e rotas da aplicação.
-- [ ] Preservar o bloqueio explícito da pasta no Vite e verificar acesso direto a arquivos.
+- [ ] Verificar acesso direto à pasta de referência no servidor de desenvolvimento. Se usar Vite, manter o bloqueio explícito.
 
 ## Implementação
 
@@ -41,6 +48,7 @@
 - [ ] Validar migrações desde banco vazio e atualização de uma versão anterior.
 - [ ] Executar lint e build do frontend.
 - [ ] Testar o fluxo completo no navegador e no celular.
+- [ ] Executar uma jornada integrada em homologação com API e banco isolados, além dos cenários com respostas simuladas.
 - [ ] Executar testes unitários do frontend e E2E Playwright, se adotados.
 - [ ] Conferir contraste de textos, campos e botões nos temas claro e escuro.
 - [ ] Testar seleção entre registros recentes e reinício do contexto pelo menu do assistente, se adotado.
@@ -56,5 +64,6 @@
 - [ ] Configurar cookie seguro em HTTPS e origens corretas.
 - [ ] Validar provedores externos sem afetar contas reais.
 - [ ] Definir backups, limites e monitoramento.
+- [ ] Ensaiar restauração e rollback e registrar as pessoas responsáveis.
 - [ ] Registrar evidências com data; não herdar resultados de testes do projeto anterior.
 - [ ] Atualizar README, arquitetura, banco, fluxos e pendências do novo sistema.

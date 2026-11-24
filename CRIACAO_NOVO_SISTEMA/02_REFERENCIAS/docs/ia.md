@@ -55,10 +55,8 @@ O sistema atual já resolve a parte estruturada do processo: Aline escolhe o tam
 
 Fontes:
 
-- [Cartilha — O negócio](C:\Users\fabio\Desktop\Avaliacao%20Front%20-%20Back\docs\CARTILHA.md)
-- [Cartilha — Perfil A](C:\Users\fabio\Desktop\Avaliacao%20Front%20-%20Back\docs\CARTILHA.md)
-- [Briefing — O problema descrito pela cartilha](C:\Users\fabio\Desktop\Avaliacao%20Front%20-%20Back\docs\BRIEFING.md)
-- [Briefing — Aline e o pedido da cesta](C:\Users\fabio\Desktop\Avaliacao%20Front%20-%20Back\docs\BRIEFING.md)
+- [Cartilha](CARTILHA.md), seções sobre o negócio e a assinante.
+- [Briefing](BRIEFING.md), seções sobre o problema e o pedido da cesta.
 
 ---
 
