@@ -8,6 +8,8 @@
 | --- | --- |
 | [Roadmap de arquitetura](ROADMAP_ARQUITETURA.md) | Entender as camadas, jornadas, fases e critérios de aceite. |
 | [Passo a passo](PASSO_A_PASSO_PROJETO.md) | Executar as oito fases, adaptando-as ao escopo escolhido. |
+| [Especificação técnica para LLM](ESPECIFICACAO_TECNICA_IMPLEMENTACAO_LLM.md) | Implementar tecnicamente da ideia à produção: stack, dados, Vercel, CI/CD, segurança e integrações LLM/agentes. |
+| [Prompt inicial para outro projeto](PROMPT_INICIAL_NOVO_PROJETO.md) | Texto pronto para iniciar outra conversa com uma LLM, anexando o manual visual e a especificação técnica. |
 | [Estado técnico](ESTADO_ATUAL.md) | Consultar a base de referência e riscos encontrados. |
 | [Modelos](01_MODELOS/01_DEFINICAO_E_PERSONAS.md) | Registrar produto, pessoas, telas, arquitetura e critérios. |
 | [Flora e testes](FLORA_FLUXO_POSSIBILIDADES_E_TESTES.md) | Adaptar a assistente se ela atender às necessidades do novo site. |
@@ -23,6 +25,7 @@
 4. Mantenha progresso e evidências no [checklist](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md).
 5. Preencha o [briefing de implementação](01_MODELOS/05_BRIEFING_PARA_IMPLEMENTACAO.md) para orientar o desenvolvimento.
 6. Use os [padrões de lançamento](01_MODELOS/06_PADROES_DE_LANCAMENTO.md) ao preparar a versão pública.
+7. Para delegar a implementação a uma LLM, use a [especificação técnica](ESPECIFICACAO_TECNICA_IMPLEMENTACAO_LLM.md) como contrato executável, junto dos modelos preenchidos; resolva todos os campos `DECIDIR` antes das etapas dependentes.
 
 ## Referências
 

@@ -1,5 +1,7 @@
 # Passo a passo para construir outro site
 
+Para execução por LLM/agentes com decisões de stack, contratos, banco, segurança, integração de IA, CI/CD e Vercel em nível de implementação, consulte também a [especificação técnica](ESPECIFICACAO_TECNICA_IMPLEMENTACAO_LLM.md). Ela complementa este passo a passo e define gates e evidências por fase.
+
 Siga as oito fases do [roadmap](ROADMAP_ARQUITETURA.md#4-etapas-dependências-e-critérios-de-aceite) e registre as evidências no [checklist de criação](01_MODELOS/04_CHECKLIST_DE_CRIACAO.md). Os exemplos usam a estrutura do Cesta do Vale.
 
 Se o novo site for institucional e estático, siga as fases 1, 2, 5, 7 e 8. Adote dados, contas e integrações conforme as jornadas exigirem.
